@@ -1,0 +1,67 @@
+:root {
+  --bg: #faf8f1;
+  --paper: #fffdf7;
+  --ink: #111111;
+  --muted: #5f5f5f;
+  --line: #1f1f1f;
+  --soft-line: #d8d2c4;
+
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
+  --container: 1120px;
+  --page-padding: clamp(1rem, 3vw, 2rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.site-shell {
+  width: min(100% - 2 * var(--page-padding), var(--container));
+  margin-inline: auto;
+  background: var(--paper);
+}
+
+.section-title {
+  margin: 0;
+  padding-block: 0.35rem;
+  border-top: 3px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 0.9;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+.kicker {
+  margin: 0 0 0.35rem;
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--muted);
+}

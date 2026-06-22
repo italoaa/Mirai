@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Posts" description="All posts from The Barebones Gazette.">
+  <section class="archive">
+    <h1 class="section-title">Posts</h1>
+
+    <div class="post-list">
+      {posts.map((post) => (
+        <article>
+          <p class="kicker">{post.data.category}</p>
+          <h2>
+            <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
+          </h2>
+          <p>{post.data.description}</p>
+          <p class="byline">
+            By {post.data.author} · {post.data.pubDate.toLocaleDateString("en")}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .archive {
+    padding: 1rem var(--page-padding);
+  }
+
+  .post-list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  article {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 0.95;
+  }
+
+  h2 a {
+    text-decoration: none;
+  }
+
+  h2 a:hover {
+    text-decoration: underline;
+  }
+
+  article > p:not(.kicker):not(.byline) {
+    max-width: 60ch;
+    color: var(--muted);
+  }
+
+  .byline {
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+</style>
