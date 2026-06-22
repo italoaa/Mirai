@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+.npm-global/
+.npm-cache/
+node_modules/
+dist/
+result
+.npm-global/
+.npm-cache/
+.DS_Store
