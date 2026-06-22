@@ -2,75 +2,137 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const posts = await getCollection("blog", ({ data }) => !data.draft);
+const sortNewest = (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
 
-posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const featured = posts.find((post) => post.data.featured) ?? posts[0];
-
-const secondaryPosts = featured
-  ? posts.filter((post) => post.id !== featured.id)
-  : [];
+const [blog, photos, ceramics] = await Promise.all([
+  getCollection("blog", ({ data }) => !data.draft),
+  getCollection("photos", ({ data }) => !data.draft),
+  getCollection("ceramics", ({ data }) => !data.draft),
+]);
 
 const base = import.meta.env.BASE_URL;
+
+blog.sort(sortNewest);
+photos.sort(sortNewest);
+ceramics.sort(sortNewest);
+
+const latestStory = blog[0] ?? photos[0] ?? ceramics[0];
+const latestPhoto = photos[0];
+const latestCeramic = ceramics[0];
+const sectionLabel = (value) => value.charAt(0).toUpperCase() + value.slice(1);
 ---
 
-<BaseLayout title="The Barebones Gazette">
-  {
-    featured ? (
-      <>
-        <section class="front-page">
-          <article class="lead-story">
-            <p class="kicker">{featured.data.category}</p>
-            <h1>
-              <a href={`${base}blog/${featured.id}/`}>{featured.data.title}</a>
-            </h1>
-            <p class="dek">{featured.data.description}</p>
-            <p class="byline">
-              By {featured.data.author} · {featured.data.pubDate.toLocaleDateString("en")}
-            </p>
-          </article>
-
-          <aside class="side-list" aria-label="Latest posts">
-            <h2>Latest</h2>
-
-            {secondaryPosts.map((post) => (
-              <article>
-                <p class="kicker">{post.data.category}</p>
-                <h3>
-                  <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
-                </h3>
-                <p>{post.data.description}</p>
-              </article>
-            ))}
-          </aside>
-        </section>
-
-        <section class="world">
-          <h2 class="section-title">World News</h2>
-
-          <div class="card-grid">
-            {posts.map((post) => (
-              <article class="card">
-                <p class="kicker">{post.data.category}</p>
-                <h3>
-                  <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
-                </h3>
-                <p>{post.data.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </>
+<BaseLayout title="Mirai Dispatch">
+  <section class="front-page">
+    {latestStory ? (
+      <article class="story lead-story">
+        <p class="kicker">{sectionLabel(latestStory.collection)}</p>
+        <h1 class="entry-title">
+          <a href={`${base}${latestStory.collection}/${latestStory.id}/`}>{latestStory.data.title}</a>
+        </h1>
+        <p class="dek">{latestStory.data.description}</p>
+        <p class="meta">{latestStory.data.pubDate.toLocaleDateString("en")}</p>
+      </article>
     ) : (
-      <section class="empty-state">
-        <h1 class="section-title">No Posts Yet</h1>
-        <p>
-          Add Markdown files to <code>src/content/blog/</code> and restart the dev server.
+      <article class="story lead-story">
+        <p class="kicker">Start here</p>
+        <h1 class="entry-title">A clean place to add your work</h1>
+        <p class="dek">
+          Add Markdown files under <code>src/content/blog</code>, <code>src/content/photos</code>,
+          and <code>src/content/ceramics</code>.
         </p>
-      </section>
-    )
-  }
+      </article>
+    )}
+
+    <aside class="story side-rail" aria-label="Latest notes">
+      <h2 class="section-title">Latest</h2>
+
+      {latestPhoto ? (
+        <article>
+          <p class="kicker">Photos</p>
+          <h3 class="entry-title">
+            <a href={`${base}photos/${latestPhoto.id}/`}>{latestPhoto.data.title}</a>
+          </h3>
+          <p>{latestPhoto.data.description}</p>
+        </article>
+      ) : null}
+
+      {latestCeramic ? (
+        <article>
+          <p class="kicker">Ceramics</p>
+          <h3 class="entry-title">
+            <a href={`${base}ceramics/${latestCeramic.id}/`}>{latestCeramic.data.title}</a>
+          </h3>
+          <p>{latestCeramic.data.description}</p>
+        </article>
+      ) : null}
+
+      {!latestPhoto && !latestCeramic ? <p class="muted">No photos or ceramics entries yet.</p> : null}
+    </aside>
+  </section>
+
+  <section class="archive-block">
+    <h2 class="section-title">Blog</h2>
+
+    <div class="entry-list two-up">
+      {blog.length > 0 ? (
+        blog.map((post) => (
+          <article class="entry">
+            <p class="kicker">Post</p>
+            <h3 class="entry-title">
+              <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
+            </h3>
+            <p>{post.data.description}</p>
+            <p class="meta">{post.data.pubDate.toLocaleDateString("en")}</p>
+          </article>
+        ))
+      ) : (
+        <p class="muted">Add your first blog post under <code>src/content/blog</code>.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="archive-block">
+    <h2 class="section-title">Photos</h2>
+
+    <div class="entry-list two-up">
+      {photos.length > 0 ? (
+        photos.map((photo) => (
+          <article class="entry">
+            <p class="kicker">Photo note</p>
+            <h3 class="entry-title">
+              <a href={`${base}photos/${photo.id}/`}>{photo.data.title}</a>
+            </h3>
+            <p>{photo.data.description}</p>
+            <p class="meta">{photo.data.pubDate.toLocaleDateString("en")}</p>
+          </article>
+        ))
+      ) : (
+        <p class="muted">Add photo notes under <code>src/content/photos</code>.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="archive-block">
+    <h2 class="section-title">Ceramics</h2>
+
+    <div class="entry-list two-up">
+      {ceramics.length > 0 ? (
+        ceramics.map((piece) => (
+          <article class="entry">
+            <p class="kicker">Studio log</p>
+            <h3 class="entry-title">
+              <a href={`${base}ceramics/${piece.id}/`}>{piece.data.title}</a>
+            </h3>
+            <p>{piece.data.description}</p>
+            <p class="meta">{piece.data.pubDate.toLocaleDateString("en")}</p>
+          </article>
+        ))
+      ) : (
+        <p class="muted">Add ceramic project notes under <code>src/content/ceramics</code>.</p>
+      )}
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -84,124 +146,52 @@ const base = import.meta.env.BASE_URL;
 
   .lead-story {
     min-height: 420px;
-    padding: 1rem;
-    border: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
     justify-content: end;
     background:
-      linear-gradient(rgba(255, 253, 247, 0.2), rgba(255, 253, 247, 0.94)),
+      linear-gradient(rgba(255, 250, 242, 0.08), rgba(255, 250, 242, 0.92)),
       repeating-linear-gradient(
         45deg,
-        #ddd6c7,
-        #ddd6c7 8px,
-        #eee8dc 8px,
-        #eee8dc 16px
+        #ddd4c2,
+        #ddd4c2 8px,
+        #eee6d9 8px,
+        #eee6d9 16px
       );
   }
 
-  .lead-story h1 {
-    max-width: 13ch;
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(3.25rem, 9vw, 7rem);
-    line-height: 0.82;
-    letter-spacing: -0.06em;
+  .lead-story .entry-title {
+    max-width: 14ch;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.84;
     text-transform: uppercase;
   }
 
-  .lead-story h1 a,
-  .card h3 a,
-  .side-list h3 a {
-    text-decoration: none;
-  }
-
-  .lead-story h1 a:hover,
-  .card h3 a:hover,
-  .side-list h3 a:hover {
-    text-decoration: underline;
-  }
-
-  .dek {
+  .lead-story .dek {
     max-width: 58ch;
     font-size: 1.1rem;
   }
 
-  .byline {
-    margin-bottom: 0;
-    font-family: Arial, sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .side-list {
+  .side-rail {
     border-left: 1px solid var(--line);
     padding-left: 1rem;
   }
 
-  .side-list h2 {
-    margin: 0 0 1rem;
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    line-height: 0.9;
-    text-transform: uppercase;
-  }
-
-  .side-list article {
-    padding-block: 0.85rem;
+  .side-rail article + article {
+    margin-top: 1rem;
+    padding-top: 1rem;
     border-top: 1px solid var(--soft-line);
   }
 
-  .side-list h3 {
-    margin: 0;
-    font-size: 1.25rem;
-    line-height: 1.05;
+  .side-rail .section-title {
+    margin-bottom: 1rem;
   }
 
-  .side-list p:last-child {
-    margin-bottom: 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  .world {
+  .archive-block {
     padding: 1rem var(--page-padding);
   }
 
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+  .two-up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: 1rem;
-  }
-
-  .card {
-    padding-right: 1rem;
-    border-right: 1px solid var(--line);
-  }
-
-  .card:last-child {
-    border-right: 0;
-  }
-
-  .card h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    line-height: 1;
-  }
-
-  .card p:last-child {
-    color: var(--muted);
-  }
-
-  .empty-state {
-    padding: 3rem var(--page-padding);
-    text-align: center;
-  }
-
-  .empty-state p {
-    color: var(--muted);
   }
 
   @media (max-width: 800px) {
@@ -209,19 +199,13 @@ const base = import.meta.env.BASE_URL;
       grid-template-columns: 1fr;
     }
 
-    .side-list {
+    .side-rail {
       border-left: 0;
       padding-left: 0;
     }
 
-    .card-grid {
+    .two-up {
       grid-template-columns: 1fr;
-    }
-
-    .card {
-      padding-right: 0;
-      border-right: 0;
-      border-bottom: 1px solid var(--line);
     }
   }
 </style>

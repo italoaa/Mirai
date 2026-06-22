@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const photos = await getCollection("photos", ({ data }) => !data.draft);
+  return photos.map((photo) => ({ params: { slug: photo.id }, props: { photo } }));
+}
+
+const { photo } = Astro.props;
+const { Content } = await render(photo);
+---
+
+<BaseLayout title={photo.data.title} description={photo.data.description}>
+  <article class="story article-page">
+    <p class="kicker">Photo note</p>
+    <h1 class="entry-title">{photo.data.title}</h1>
+    <p class="meta">{photo.data.pubDate.toLocaleDateString("en")}</p>
+    <p>{photo.data.description}</p>
+
+    {photo.data.image ? (
+      <figure class="photo-frame">
+        <img src={photo.data.image} alt={photo.data.title} />
+      </figure>
+    ) : (
+      <p class="muted">Add an `image` field later if you want a featured photo here.</p>
+    )}
+
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    margin: 1rem var(--page-padding);
+  }
+
+  .photo-frame {
+    margin: 1rem 0;
+    border: 1px solid var(--line);
+    padding: 0.5rem;
+  }
+
+  .photo-frame img {
+    display: block;
+    width: 100%;
+  }
+
+  .article-body {
+    max-width: 70ch;
+  }
+
+  .article-body :global(p) {
+    margin-block: 0 1rem;
+  }
+</style>

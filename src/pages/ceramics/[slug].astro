@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const pieces = await getCollection("ceramics", ({ data }) => !data.draft);
+  return pieces.map((piece) => ({ params: { slug: piece.id }, props: { piece } }));
+}
+
+const { piece } = Astro.props;
+const { Content } = await render(piece);
+---
+
+<BaseLayout title={piece.data.title} description={piece.data.description}>
+  <article class="story article-page">
+    <p class="kicker">Ceramics project</p>
+    <h1 class="entry-title">{piece.data.title}</h1>
+    <p class="meta">{piece.data.pubDate.toLocaleDateString("en")}</p>
+    <p>{piece.data.description}</p>
+
+    {piece.data.image ? (
+      <figure class="photo-frame">
+        <img src={piece.data.image} alt={piece.data.title} />
+      </figure>
+    ) : null}
+
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    margin: 1rem var(--page-padding);
+  }
+
+  .photo-frame {
+    margin: 1rem 0;
+    border: 1px solid var(--line);
+    padding: 0.5rem;
+  }
+
+  .photo-frame img {
+    display: block;
+    width: 100%;
+  }
+
+  .article-body {
+    max-width: 70ch;
+  }
+
+  .article-body :global(p) {
+    margin-block: 0 1rem;
+  }
+</style>

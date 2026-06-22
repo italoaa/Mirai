@@ -1,13 +1,13 @@
 :root {
-  --bg: #faf8f1;
-  --paper: #fffdf7;
+  --bg: #f4efe5;
+  --paper: #fffaf2;
   --ink: #111111;
-  --muted: #5f5f5f;
-  --line: #1f1f1f;
-  --soft-line: #d8d2c4;
+  --muted: #5b5548;
+  --line: #1d1b17;
+  --soft-line: #d7cdbc;
 
   --font-body: Georgia, "Times New Roman", serif;
-  --font-display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --font-display: "Arial Narrow", Arial, sans-serif;
 
   --container: 1120px;
   --page-padding: clamp(1rem, 3vw, 2rem);
@@ -38,6 +38,7 @@ img {
   width: min(100% - 2 * var(--page-padding), var(--container));
   margin-inline: auto;
   background: var(--paper);
+  box-shadow: 0 0 0 1px rgba(29, 27, 23, 0.08);
 }
 
 .section-title {
@@ -64,4 +65,53 @@ img {
 
 .muted {
   color: var(--muted);
+}
+
+.entry-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.entry {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.entry-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.entry-title a {
+  text-decoration: none;
+}
+
+.entry-title a:hover {
+  text-decoration: underline;
+}
+
+.meta {
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.story {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+}
+
+.story h2,
+.story h3 {
+  margin: 0;
+}
+
+.story p:last-child {
+  margin-bottom: 0;
 }
