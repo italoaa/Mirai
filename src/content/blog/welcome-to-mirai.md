@@ -1,6 +1,6 @@
 ---
-title: "Welcome to Mirai"
-description: "A first post to anchor the personal archive and make room for future writing."
+title: "Breaking news! On Mirai"
+description: "Newspaper style website for my own life"
 pubDate: 2026-06-22
 draft: false
 featured: true
@@ -8,4 +8,4 @@ featured: true
 
 This is the first post on the site.
 
-Use this section for essays, notes, links, drafts, or anything else you want to keep in one place.
+I used to have a different website but I have been thinking of changing it for a long time. This website has the idea of being like a news paper. But instead of being news about the world it will be about me!

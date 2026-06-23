@@ -41,6 +41,7 @@
             echo ""
             echo "Build with Nix:"
             echo "  nix build"
+            npm install
           '';
         };
 
