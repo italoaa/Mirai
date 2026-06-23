@@ -31,26 +31,30 @@ const { Content } = await render(piece);
 </BaseLayout>
 
 <style>
-  .article-page {
-    margin: 1rem var(--page-padding);
-  }
+.article-page {
+  border-top: 4px double var(--line);
+}
 
-  .photo-frame {
-    margin: 1rem 0;
-    border: 1px solid var(--line);
-    padding: 0.5rem;
-  }
+.article-page > .kicker,
+.article-page > .entry-title,
+.article-page > .meta,
+.article-page > p {
+  text-align: center;
+}
 
-  .photo-frame img {
-    display: block;
-    width: 100%;
-  }
+.photo-frame {
+  margin: 1.25rem 0;
+  border: 1px solid var(--line);
+  padding: 0.5rem;
+  background: var(--paper);
+}
 
-  .article-body {
-    max-width: 70ch;
-  }
+.photo-frame img {
+  display: block;
+  width: 100%;
+}
 
-  .article-body :global(p) {
-    margin-block: 0 1rem;
-  }
+.article-body {
+  margin-inline: auto;
+}
 </style>

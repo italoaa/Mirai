@@ -1,11 +1,12 @@
 ---
 title: "Japan"
-description: "Photo post."
+description: "Some photos I took when I was in japan"
 pubDate: 2026-06-20
 author: "Italo Amaya"
 category: "Photos"
 featured: true
 draft: false
+image: "/images/photos/japan/IMG_3795.JPG"
 ---
 
 <img src="/images/photos/japan/DSCN2777.JPG" alt="Japan photo DSCN2777" />
@@ -16,7 +17,6 @@ draft: false
 
 <img src="/images/photos/japan/DSCN3016.JPG" alt="Japan photo DSCN3016" />
 
-<img src="/images/photos/japan/IMG_3795.JPG" alt="Japan photo IMG_3795" />
 
 <img src="/images/photos/japan/IMG_3875.JPG" alt="Japan photo IMG_3875" />
 

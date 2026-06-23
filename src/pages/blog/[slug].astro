@@ -24,21 +24,32 @@ const { Content } = await render(post);
 </BaseLayout>
 
 <style>
-  .article-page {
-    margin: 1rem var(--page-padding);
-  }
+.article-page {
+  border-top: 4px double var(--line);
+  border-bottom: 1px solid var(--line);
+}
 
-  .article-body {
-    max-width: 70ch;
-  }
+.article-page > .kicker,
+.article-page > .entry-title,
+.article-page > .meta,
+.article-page > p {
+  text-align: center;
+}
 
-  .article-body :global(p) {
-    margin-block: 0 1rem;
-  }
+.article-page > p:not(.kicker):not(.meta) {
+  max-width: 58ch;
+  margin-inline: auto;
+  font-size: 1.15rem;
+  font-style: italic;
+}
 
-  .article-body :global(h2),
-  .article-body :global(h3) {
-    margin: 1.5rem 0 0.5rem;
-    line-height: 1.1;
-  }
+.article-body {
+  margin-inline: auto;
+}
+
+.article-body :global(h2),
+.article-body :global(h3) {
+  margin: 1.5rem 0 0.5rem;
+  line-height: 1.1;
+}
 </style>

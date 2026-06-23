@@ -16,9 +16,23 @@ blog.sort(sortNewest);
 photos.sort(sortNewest);
 ceramics.sort(sortNewest);
 
-const latestStory = blog[0] ?? photos[0] ?? ceramics[0];
+const featuredBlog = blog.filter((post) => post.data.featured);
+const regularBlog = blog.filter((post) => !post.data.featured);
+
+const latestStory = featuredBlog[0] ?? blog[0] ?? photos[0] ?? ceramics[0];
+
+const frontPageFeaturedBlog = featuredBlog.filter(
+  (post) => post.id !== latestStory?.id
+);
+
 const latestPhoto = photos[0];
 const latestCeramic = ceramics[0];
+
+const archiveBlog = [
+  ...frontPageFeaturedBlog,
+  ...regularBlog,
+].filter((post) => post.id !== latestStory?.id);
+
 const sectionLabel = (value) => value.charAt(0).toUpperCase() + value.slice(1);
 ---
 
@@ -26,10 +40,18 @@ const sectionLabel = (value) => value.charAt(0).toUpperCase() + value.slice(1);
   <section class="front-page">
     {latestStory ? (
       <article class="story lead-story">
-        <p class="kicker">{sectionLabel(latestStory.collection)}</p>
+        <p class="kicker">
+          {latestStory.collection === "blog" && latestStory.data.featured
+            ? "Featured dispatch"
+            : sectionLabel(latestStory.collection)}
+        </p>
+
         <h1 class="entry-title">
-          <a href={`${base}${latestStory.collection}/${latestStory.id}/`}>{latestStory.data.title}</a>
+          <a href={`${base}${latestStory.collection}/${latestStory.id}/`}>
+            {latestStory.data.title}
+          </a>
         </h1>
+
         <p class="dek">{latestStory.data.description}</p>
         <p class="meta">{latestStory.data.pubDate.toLocaleDateString("en")}</p>
       </article>
@@ -45,40 +67,76 @@ const sectionLabel = (value) => value.charAt(0).toUpperCase() + value.slice(1);
     )}
 
     <aside class="story side-rail" aria-label="Latest notes">
-      <h2 class="section-title">Latest</h2>
+      <h2 class="section-title">Featured</h2>
 
-      {latestPhoto ? (
-        <article>
-          <p class="kicker">Photos</p>
-          <h3 class="entry-title">
-            <a href={`${base}photos/${latestPhoto.id}/`}>{latestPhoto.data.title}</a>
-          </h3>
-          <p>{latestPhoto.data.description}</p>
-        </article>
-      ) : null}
+      {frontPageFeaturedBlog.length > 0 ? (
+        frontPageFeaturedBlog.slice(0, 3).map((post) => (
+          <article>
+            <p class="kicker">Featured post</p>
+            <h3 class="entry-title">
+              <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
+            </h3>
+            <p>{post.data.description}</p>
+            <p class="meta">{post.data.pubDate.toLocaleDateString("en")}</p>
+          </article>
+        ))
+      ) : (
+        <>
+          {latestPhoto ? (
+            <article>
+              <p class="kicker">Photos</p>
+              <h3 class="entry-title">
+                <a href={`${base}photos/${latestPhoto.id}/`}>{latestPhoto.data.title}</a>
+              </h3>
+              <p>{latestPhoto.data.description}</p>
+            </article>
+          ) : null}
 
-      {latestCeramic ? (
-        <article>
-          <p class="kicker">Ceramics</p>
-          <h3 class="entry-title">
-            <a href={`${base}ceramics/${latestCeramic.id}/`}>{latestCeramic.data.title}</a>
-          </h3>
-          <p>{latestCeramic.data.description}</p>
-        </article>
-      ) : null}
+          {latestCeramic ? (
+            <article>
+              <p class="kicker">Ceramics</p>
+              <h3 class="entry-title">
+                <a href={`${base}ceramics/${latestCeramic.id}/`}>{latestCeramic.data.title}</a>
+              </h3>
+              <p>{latestCeramic.data.description}</p>
+            </article>
+          ) : null}
 
-      {!latestPhoto && !latestCeramic ? <p class="muted">No photos or ceramics entries yet.</p> : null}
+          {!latestPhoto && !latestCeramic ? (
+            <p class="muted">No featured posts, photos, or ceramics entries yet.</p>
+          ) : null}
+        </>
+      )}
     </aside>
   </section>
+
+  {frontPageFeaturedBlog.length > 3 ? (
+    <section class="archive-block featured-strip">
+      <h2 class="section-title">More Featured</h2>
+
+      <div class="entry-list two-up">
+        {frontPageFeaturedBlog.slice(3).map((post) => (
+          <article class="entry">
+            <p class="kicker">Featured post</p>
+            <h3 class="entry-title">
+              <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
+            </h3>
+            <p>{post.data.description}</p>
+            <p class="meta">{post.data.pubDate.toLocaleDateString("en")}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  ) : null}
 
   <section class="archive-block">
     <h2 class="section-title">Blog</h2>
 
     <div class="entry-list two-up">
-      {blog.length > 0 ? (
-        blog.map((post) => (
-          <article class="entry">
-            <p class="kicker">Post</p>
+      {archiveBlog.length > 0 ? (
+        archiveBlog.map((post) => (
+          <article class={`entry ${post.data.featured ? "is-featured" : ""}`}>
+            <p class="kicker">{post.data.featured ? "Featured post" : "Post"}</p>
             <h3 class="entry-title">
               <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
             </h3>
@@ -136,76 +194,132 @@ const sectionLabel = (value) => value.charAt(0).toUpperCase() + value.slice(1);
 </BaseLayout>
 
 <style>
+.featured-strip {
+  background: rgba(143, 29, 20, 0.055);
+}
+
+.is-featured {
+  position: relative;
+}
+
+.is-featured::before {
+  content: "FEATURED";
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  padding: 0.15rem 0.35rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+.front-page {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(260px, 0.9fr);
+  gap: 1rem;
+  padding: 1rem var(--page-padding);
+  border-bottom: 4px double var(--line);
+}
+
+.lead-story {
+  min-height: 460px;
+  align-content: end;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(rgba(255, 248, 234, 0.05), rgba(255, 248, 234, 0.94)),
+    repeating-linear-gradient(
+      -35deg,
+      #cfc3ad,
+      #cfc3ad 8px,
+      #eadfcb 8px,
+      #eadfcb 16px
+    );
+}
+
+.lead-story .entry-title {
+  max-width: 12ch;
+  font-size: clamp(3.4rem, 8.5vw, 7rem);
+  line-height: 0.8;
+  text-transform: uppercase;
+}
+
+.lead-story .dek {
+  max-width: 56ch;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-style: italic;
+}
+
+.side-rail {
+  padding-left: 1rem;
+  border-left: 1px solid var(--line);
+}
+
+.side-rail .section-title {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.side-rail article {
+  padding-bottom: 1rem;
+}
+
+.side-rail article + article {
+  padding-top: 1rem;
+  border-top: 1px solid var(--soft-line);
+}
+
+.side-rail .entry-title {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.archive-block {
+  padding: 1.1rem var(--page-padding);
+}
+
+.archive-block .section-title {
+  margin-bottom: 1rem;
+}
+
+.two-up {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.25rem;
+  row-gap: 1rem;
+}
+
+.two-up .entry {
+  min-height: 11rem;
+}
+
+.two-up .entry:nth-child(3n + 1) {
+  grid-column: span 2;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  background: rgba(245, 236, 216, 0.55);
+}
+
+.two-up .entry:nth-child(3n + 1) .entry-title {
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  text-transform: uppercase;
+}
+
+@media (max-width: 800px) {
   .front-page {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 1.25rem;
-    padding: 1rem var(--page-padding);
-    border-bottom: 3px solid var(--line);
-  }
-
-  .lead-story {
-    min-height: 420px;
-    justify-content: end;
-    background:
-      linear-gradient(rgba(255, 250, 242, 0.08), rgba(255, 250, 242, 0.92)),
-      repeating-linear-gradient(
-        45deg,
-        #ddd4c2,
-        #ddd4c2 8px,
-        #eee6d9 8px,
-        #eee6d9 16px
-      );
-  }
-
-  .lead-story .entry-title {
-    max-width: 14ch;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    line-height: 0.84;
-    text-transform: uppercase;
-  }
-
-  .lead-story .dek {
-    max-width: 58ch;
-    font-size: 1.1rem;
+    grid-template-columns: 1fr;
   }
 
   .side-rail {
-    border-left: 1px solid var(--line);
-    padding-left: 1rem;
-  }
-
-  .side-rail article + article {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--soft-line);
-  }
-
-  .side-rail .section-title {
-    margin-bottom: 1rem;
-  }
-
-  .archive-block {
-    padding: 1rem var(--page-padding);
+    border-left: 0;
+    padding-left: 0;
   }
 
   .two-up {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: 1rem;
+    grid-template-columns: 1fr;
   }
 
-  @media (max-width: 800px) {
-    .front-page {
-      grid-template-columns: 1fr;
-    }
-
-    .side-rail {
-      border-left: 0;
-      padding-left: 0;
-    }
-
-    .two-up {
-      grid-template-columns: 1fr;
-    }
+  .two-up .entry:nth-child(3n + 1) {
+    grid-column: auto;
   }
+}
 </style>

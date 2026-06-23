@@ -14,14 +14,22 @@ const base = import.meta.env.BASE_URL;
     <div class="entry-list" style="margin-top: 1rem;">
       {photos.length > 0 ? (
         photos.map((photo) => (
-          <article class="entry">
-            <p class="kicker">Photo note</p>
-            <h2 class="entry-title">
-              <a href={`${base}photos/${photo.id}/`}>{photo.data.title}</a>
-            </h2>
-            <p>{photo.data.description}</p>
-            <p class="meta">{photo.data.pubDate.toLocaleDateString("en")}</p>
-          </article>
+<article class="entry archive-entry">
+  {photo.data.image ? (
+    <a class="thumb" href={`${base}photos/${photo.id}/`}>
+      <img src={photo.data.image} alt={photo.data.title} />
+    </a>
+  ) : null}
+
+  <div>
+    <p class="kicker">Photo note</p>
+    <h2 class="entry-title">
+      <a href={`${base}photos/${photo.id}/`}>{photo.data.title}</a>
+    </h2>
+    <p>{photo.data.description}</p>
+    <p class="meta">{photo.data.pubDate.toLocaleDateString("en")}</p>
+  </div>
+</article>
         ))
       ) : (
         <p class="muted">No photo entries yet. Add Markdown files under <code>src/content/photos</code>.</p>

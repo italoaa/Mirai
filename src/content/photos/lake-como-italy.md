@@ -1,14 +1,14 @@
 ---
 title: "Lake Como, Italy"
-description: "Photo post."
+description: "Photos from Lake Como in Italy"
 pubDate: 2026-06-21
 author: "Italo Amaya"
 category: "Photos"
 featured: false
 draft: false
+image: "/images/photos/lake_como_italy/DSCN3771.JPG"
 ---
 
-<img src="/images/photos/lake_como_italy/DSCN3771.JPG" alt="Lake Como photo DSCN3771" />
 
 <img src="/images/photos/lake_como_italy/DSCN3774.JPG" alt="Lake Como photo DSCN3774" />
 
