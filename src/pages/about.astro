@@ -5,7 +5,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout title="About">
   <article class="story about-page">
     <p class="kicker">About</p>
-    <h1 class="entry-title">A small personal archive (WIP)</h1>
+    <h1 class="entry-title">What is Mirai?</h1>
+    <p>
+      Hi! my name is Italo Amaya, and this is my personal website. The name Mirai comes from the following kanji 未来 (みらい) which means future in Japanese. This is a personal archive/newspaper, the idea is to post news about myself.
+      </p>
   </article>
 </BaseLayout>
 
@@ -14,11 +17,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     margin: 1rem var(--page-padding);
   }
 
-  .article-body {
-    max-width: 70ch;
+  .about-page > .kicker,
+  .about-page > .entry-title,
+  .about-page > p {
+    text-align: center;
   }
 
-  .article-body :global(p) {
-    margin-block: 0 1rem;
-  }
 </style>
