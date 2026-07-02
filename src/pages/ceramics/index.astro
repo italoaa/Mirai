@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import RandomGrid from "../components/RandomGrid.astro";
+import RandomGrid from "../../components/RandomGrid.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("ceramics", ({ data }) => !data.draft);
