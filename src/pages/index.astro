@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import RandomGrid from "./components/RandomGrid.astro";
 import { getCollection } from "astro:content";
 
 const sortNewest = (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
@@ -25,7 +26,44 @@ const sideItems = [
   ceramics[0],
 ].filter(Boolean);
 
-const archiveBlog = blog.filter((post) => post.id !== lead?.id);
+const allDispatches = [...blog, ...photos, ...ceramics]
+  .filter((item) => item.id !== lead?.id)
+  .sort(sortNewest);
+
+const getHref = (item) => `${base}${item.collection}/${item.id}/`;
+
+const getKicker = (item) => {
+  if (item.collection === "blog") {
+    return item.data.featured ? "Featured" : "Blog";
+  }
+
+  if (item.collection === "photos") {
+    return "Photo";
+  }
+
+  if (item.collection === "ceramics") {
+    return "Ceramics";
+  }
+
+  return item.collection;
+};
+
+const getExcerpt = (item, length = 200) => {
+  const raw = item.body ?? "";
+
+  const clean = raw
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/[#>*_`~-]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!clean) return item.data.description;
+
+  return clean.length > length ? `${clean.slice(0, length)}...` : clean;
+};
+
+const leadContent = lead ? getExcerpt(lead, 200) : "";
 ---
 
 <BaseLayout title="Mirai Dispatch">
@@ -43,13 +81,14 @@ const archiveBlog = blog.filter((post) => post.id !== lead?.id);
 
     {lead ? (
       <article class="story lead-story">
-        <p class="kicker">{lead.data.featured ? "Featured" : lead.collection}</p>
+        <p class="kicker">{getKicker(lead)}</p>
 
         <h1 class="entry-title">
-          <a href={`${base}${lead.collection}/${lead.id}/`}>{lead.data.title}</a>
+          <a href={getHref(lead)}>{lead.data.title}</a>
         </h1>
 
         <p class="dek">{lead.data.description}</p>
+        <p>{leadContent}</p>
         <p class="meta">{lead.data.pubDate.toLocaleDateString("en")}</p>
       </article>
     ) : null}
@@ -59,76 +98,23 @@ const archiveBlog = blog.filter((post) => post.id !== lead?.id);
 
       {sideItems.map((item) => (
         <article>
-          <p class="kicker">{item.collection}</p>
+          <p class="kicker">{getKicker(item)}</p>
+
           <h3 class="entry-title">
-            <a href={`${base}${item.collection}/${item.id}/`}>{item.data.title}</a>
+            <a href={getHref(item)}>{item.data.title}</a>
           </h3>
-          <p>{item.data.description}</p>
+
+          <p class="dek">{item.data.description}</p>
         </article>
       ))}
     </aside>
   </section>
 
-  <section class="archive-block">
-    <h2 class="section-title">Blog</h2>
-
-    <div class="entry-list story-grid">
-      {archiveBlog.map((post) => (
-        <article class="entry">
-          <p class="kicker">{post.data.featured ? "Featured" : "Post"}</p>
-          <h3 class="entry-title">
-            <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
-          </h3>
-          <p>{post.data.description}</p>
-          <p class="meta">{post.data.pubDate.toLocaleDateString("en")}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="archive-block">
-    <h2 class="section-title">Photos</h2>
-
-    <div class="entry-list story-grid">
-      {photos.map((photo) => (
-        <article class="entry image-entry">
-          {photo.data.image ? (
-            <a href={`${base}photos/${photo.id}/`}>
-              <img src={photo.data.image} alt={photo.data.title} />
-            </a>
-          ) : null}
-
-          <p class="kicker">Photo</p>
-          <h3 class="entry-title">
-            <a href={`${base}photos/${photo.id}/`}>{photo.data.title}</a>
-          </h3>
-          <p>{photo.data.description}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="archive-block">
-    <h2 class="section-title">Ceramics</h2>
-
-    <div class="entry-list story-grid">
-      {ceramics.map((piece) => (
-        <article class="entry image-entry">
-          {piece.data.image ? (
-            <a href={`${base}ceramics/${piece.id}/`}>
-              <img src={piece.data.image} alt={piece.data.title} />
-            </a>
-          ) : null}
-
-          <p class="kicker">Ceramics</p>
-          <h3 class="entry-title">
-            <a href={`${base}ceramics/${piece.id}/`}>{piece.data.title}</a>
-          </h3>
-          <p>{piece.data.description}</p>
-        </article>
-      ))}
-    </div>
-  </section>
+  <RandomGrid
+    title="All Dispatches"
+    items={allDispatches}
+    emptyMessage="No dispatches yet. Add Markdown files under src/content/blog, src/content/photos, or src/content/ceramics."
+  />
 </BaseLayout>
 
 <style>
@@ -139,15 +125,33 @@ const archiveBlog = blog.filter((post) => post.id !== lead?.id);
     padding-block: 1.5rem;
   }
 
-  .world-list,
   .side-rail {
     border-left: 1px dashed var(--line);
     padding-left: 1rem;
   }
 
+  .dek {
+    margin: 1rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    color: var(--muted);
+  }
+
   .world-list {
-    border-left: 0;
-    padding-left: 0;
+    padding-right: 1rem;
+    border-right: 1px dashed var(--line);
+  }
+
+  .section-subtitle {
+    margin: 0;
+    padding-block: 0 0.75rem;
+    border-bottom: 1px dashed var(--line);
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .glance-item {
@@ -168,7 +172,16 @@ const archiveBlog = blog.filter((post) => post.id !== lead?.id);
   }
 
   .glance-item a {
-    font-weight: 700;
+    font-weight: 200;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    text-decoration-color: var(--muted);
+  }
+
+  .glance-item a:hover {
+    color: var(--primary);
+    text-decoration-color: var(--primary);
   }
 
   .lead-story {
@@ -178,16 +191,21 @@ const archiveBlog = blog.filter((post) => post.id !== lead?.id);
   .lead-story .entry-title {
     max-width: 12ch;
     margin-inline: auto;
-    font-size: clamp(3rem, 6vw, 5.4rem);
+    font-size: clamp(3rem, 5vw, 5.4rem);
     line-height: 0.9;
   }
 
   .lead-story .dek {
     max-width: 36rem;
     margin-inline: auto;
-    color: #48423a;
+    color: var(--muted);
     font-size: clamp(1.05rem, 2vw, 1.25rem);
     line-height: 1.2;
+  }
+
+  .lead-story > p:not(.kicker):not(.dek):not(.meta) {
+    max-width: 48ch;
+    margin-inline: auto;
   }
 
   .side-rail article {
@@ -199,39 +217,37 @@ const archiveBlog = blog.filter((post) => post.id !== lead?.id);
     font-size: clamp(1.35rem, 2vw, 1.8rem);
   }
 
-  .story-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .story-grid .entry {
-    padding-inline: 1rem;
-    border-left: 1px dashed var(--line);
-  }
-
-  .story-grid .entry:nth-child(4n + 1) {
-    padding-left: 0;
-    border-left: 0;
-  }
-
-  .image-entry img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    margin-bottom: 0.8rem;
-  }
-
   @media (max-width: 950px) {
-    .front-page,
-    .story-grid {
+    .front-page {
       grid-template-columns: 1fr;
     }
 
     .world-list,
-    .side-rail,
-    .story-grid .entry {
-      padding-left: 0;
-      border-left: 0;
+    .side-rail {
+      padding-inline: 0;
+      border-inline: 0;
+    }
+
+    .side-rail {
+      border-top: 1px dashed var(--line);
+      padding-top: 1rem;
+    }
+
+    .lead-story {
+      padding-block: 1rem;
+      border-block: 1px dashed var(--line);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lead-story {
+      text-align: left;
+    }
+
+    .lead-story .entry-title,
+    .lead-story .dek,
+    .lead-story > p:not(.kicker):not(.dek):not(.meta) {
+      margin-inline: 0;
     }
   }
 </style>

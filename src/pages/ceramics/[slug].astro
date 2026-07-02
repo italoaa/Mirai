@@ -12,14 +12,17 @@ const { Content } = await render(piece);
 ---
 
 <BaseLayout title={piece.data.title} description={piece.data.description}>
-  <article class="story article-page">
+  <article class="story article-page ceramics-article">
     <p class="kicker">Ceramics project</p>
+
     <h1 class="entry-title">{piece.data.title}</h1>
+
     <p class="meta">{piece.data.pubDate.toLocaleDateString("en")}</p>
+
     <p>{piece.data.description}</p>
 
     {piece.data.image ? (
-      <figure class="photo-frame">
+      <figure class="photo-frame ceramics-frame">
         <img src={piece.data.image} alt={piece.data.title} />
       </figure>
     ) : null}
@@ -31,30 +34,80 @@ const { Content } = await render(piece);
 </BaseLayout>
 
 <style>
-.article-page {
-  border-top: 4px double var(--line);
-}
+  .ceramics-article {
+    width: 100%;
+    max-width: min(780px, 100%);
+    margin: 1.5rem auto;
+    padding-block: 1.5rem;
+    border-top: 4px double var(--line);
+  }
 
-.article-page > .kicker,
-.article-page > .entry-title,
-.article-page > .meta,
-.article-page > p {
-  text-align: center;
-}
+  .ceramics-article > .kicker,
+  .ceramics-article > .entry-title,
+  .ceramics-article > .meta,
+  .ceramics-article > p {
+    text-align: center;
+  }
 
-.photo-frame {
-  margin: 1.25rem 0;
-  border: 1px solid var(--line);
-  padding: 0.5rem;
-  background: var(--paper);
-}
+  .ceramics-frame {
+    position: relative;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 1.5rem auto;
+    padding: 0.5rem;
+    border: 4px double var(--line);
+    background: var(--surface);
+    overflow: hidden;
+  }
 
-.photo-frame img {
-  display: block;
-  width: 100%;
-}
+  .ceramics-frame img {
+    display: block;
+    width: auto;
+    max-width: min(100%, 900px);
+    max-height: calc(80vh - 1rem);
+    height: auto;
+    object-fit: contain;
+    border: 0;
+    filter: none !important;
+  }
 
-.article-body {
-  margin-inline: auto;
-}
+  .ceramics-frame::after {
+    display: none;
+  }
+
+  .ceramics-article :global(img) {
+    max-width: 100%;
+    max-height: 80vh;
+    height: auto;
+    object-fit: contain;
+    filter: none !important;
+  }
+
+  .ceramics-article :global(figure::after),
+  .ceramics-article :global(.photo-frame::after) {
+    display: none;
+  }
+
+  .article-body {
+    margin-inline: auto;
+  }
+
+  @media (max-width: 700px) {
+    .ceramics-frame {
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+    }
+
+    .ceramics-frame img {
+      width: 100%;
+      max-width: 100%;
+      max-height: none;
+    }
+
+    .ceramics-article :global(img) {
+      max-height: none;
+    }
+  }
 </style>

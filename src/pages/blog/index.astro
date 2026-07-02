@@ -1,31 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import RandomGrid from "../components/RandomGrid.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
+
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Blog">
-  <section class="archive-block">
-    <h1 class="section-title">Blog</h1>
-
-    <div class="entry-list" style="margin-top: 1rem;">
-      {posts.length > 0 ? (
-        posts.map((post) => (
-          <article class="entry">
-            <p class="kicker">Post</p>
-            <h2 class="entry-title">
-              <a href={`${base}blog/${post.id}/`}>{post.data.title}</a>
-            </h2>
-            <p>{post.data.description}</p>
-            <p class="meta">{post.data.pubDate.toLocaleDateString("en")}</p>
-          </article>
-        ))
-      ) : (
-        <p class="muted">No blog posts yet. Add Markdown files under <code>src/content/blog</code>.</p>
-      )}
-    </div>
-  </section>
+  <RandomGrid
+    title="Blog"
+    items={posts}
+    emptyMessage="No blog posts yet. Add Markdown files under src/content/blog."
+  />
 </BaseLayout>

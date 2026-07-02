@@ -12,52 +12,122 @@ const { Content } = await render(photo);
 ---
 
 <BaseLayout title={photo.data.title} description={photo.data.description}>
-  <article class="story article-page">
+  <article class="story article-page photos-article">
     <p class="kicker">Photo note</p>
+
     <h1 class="entry-title">{photo.data.title}</h1>
+
     <p class="meta">{photo.data.pubDate.toLocaleDateString("en")}</p>
+
     <p>{photo.data.description}</p>
 
     {photo.data.image ? (
-      <figure class="photo-frame">
+      <figure class="photo-frame photos-frame">
         <img src={photo.data.image} alt={photo.data.title} />
       </figure>
     ) : (
       <p class="muted">Add an `image` field later if you want a featured photo here.</p>
     )}
 
-    <div class="article-body">
+    <div class="article-body photos-body">
       <Content />
     </div>
   </article>
 </BaseLayout>
 
 <style>
+  .photos-article {
+    width: 100%;
+    max-width: min(780px, 100%);
+    margin: 1.5rem auto;
+    padding-block: 1.5rem;
+    border-top: 4px double var(--line);
+  }
 
-.article-page {
-  border-top: 4px double var(--line);
-}
+  .photos-article > .kicker,
+  .photos-article > .entry-title,
+  .photos-article > .meta,
+  .photos-article > p {
+    text-align: center;
+  }
 
-.article-page > .kicker,
-.article-page > .entry-title,
-.article-page > .meta,
-.article-page > p {
-  text-align: center;
-}
+  .photos-frame {
+    position: relative;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 1.5rem auto;
+    padding: 0.5rem;
+    border: 4px double var(--line);
+    background: var(--surface);
+    overflow: hidden;
+  }
 
-.photo-frame {
-  margin: 1.25rem 0;
-  border: 1px solid var(--line);
-  padding: 0.5rem;
-  background: var(--paper);
-}
+  .photos-frame img {
+    display: block;
+    width: auto;
+    max-width: min(100%, 900px);
+    max-height: calc(80vh - 1rem);
+    height: auto;
+    object-fit: contain;
+    border: 0;
+  }
 
-.photo-frame img {
-  display: block;
-  width: 100%;
-}
+  .photos-frame::after {
+    display: none;
+  }
 
-.article-body {
-  margin-inline: auto;
-}
+  .article-body {
+    margin-inline: auto;
+  }
+
+  @media (max-width: 700px) {
+    .photos-frame {
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+    }
+
+    .photos-frame img {
+      width: 100%;
+      max-width: 100%;
+      max-height: none;
+    }
+  }
+</style>
+
+<style is:global>
+  .photos-article img,
+  .photos-article a:hover img,
+  :root[data-theme="dark"] .photos-article img,
+  :root[data-theme="dark"] .photos-article a:hover img {
+    filter: none !important;
+  }
+
+  .photos-article figure::after,
+  .photos-article .photo-frame::after,
+  .photos-article .tile-image::after {
+    display: none !important;
+  }
+
+  .photos-article .article-body img {
+    display: block;
+    width: auto;
+    max-width: min(100%, 900px);
+    max-height: 80vh;
+    height: auto;
+    margin: 1.5rem auto;
+    object-fit: contain;
+    border: 4px double var(--line);
+    background: var(--surface);
+    padding: 0.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .photos-article .article-body img {
+      width: 100%;
+      max-width: 100%;
+      max-height: none;
+    }
+  }
 </style>

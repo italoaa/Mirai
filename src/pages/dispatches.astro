@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const sortNewest = (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+
+const [blog, photos, ceramics] = await Promise.all([
+  getCollection("blog", ({ data }) => !data.draft),
+  getCollection("photos", ({ data }) => !data.draft),
+  getCollection("ceramics", ({ data }) => !data.draft),
+]);
+
+const posts = [...blog, ...photos, ...ceramics].sort(sortNewest);
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Dispatches">
+  <section class="dispatches-page">
+    <h1 class="section-title">All Dispatches</h1>
+
+    <div class="dispatch-list">
+      {posts.map((post) => (
+        <article class="dispatch-item">
+          <time>{post.data.pubDate.toLocaleDateString("en")}</time>
+
+          <a href={`${base}${post.collection}/${post.id}/`}>
+            {post.data.title}
+          </a>
+
+          <span>{post.collection}</span>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .dispatches-page {
+    padding-block: 1.25rem;
+  }
+
+  .dispatch-list {
+    border-top: 1px dashed var(--line);
+  }
+
+  .dispatch-item {
+    display: grid;
+    grid-template-columns: 8rem 1fr 6rem;
+    gap: 1rem;
+    padding-block: 0.75rem;
+    border-bottom: 1px dashed var(--line);
+    align-items: baseline;
+  }
+
+  .dispatch-item time,
+  .dispatch-item span {
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .dispatch-item a {
+    text-decoration: none;
+  }
+
+  .dispatch-item a:hover {
+    color: var(--primary);
+  }
+
+  @media (max-width: 640px) {
+    .dispatch-item {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>

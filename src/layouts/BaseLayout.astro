@@ -22,17 +22,31 @@ const base = import.meta.env.BASE_URL;
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+<script is:inline>
+  const savedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+    document.documentElement.dataset.theme = "dark";
+  }
+</script>
     <title>{pageTitle}</title>
   </head>
 
   <body>
     <div class="site-shell">
       <header class="masthead">
-        <div class="topbar">
-          <span>Vol. 1</span>
-          <span>Italo Amaya</span>
-          <span>{new Date().toLocaleDateString("en")}</span>
-        </div>
+	<div class="topbar">
+	<span>Vol. 1</span>
+	<span>Personal Archive</span>
+
+	<span class="topbar-right">
+	    <span>{new Date().toLocaleDateString("en")}</span>
+	    <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+	    ◐
+	    </button>
+	</span>
+	</div>
 
         <a class="brand" href={base}>Mirai</a>
 
@@ -41,6 +55,7 @@ const base = import.meta.env.BASE_URL;
           <a href={`${base}blog/`}>Blog</a>
           <a href={`${base}photos/`}>Photos</a>
           <a href={`${base}ceramics/`}>Ceramics</a>
+	  <a href={`${base}dispatches/`}>Dispatches</a>
           <a href={`${base}about/`}>About</a>
         </nav>
       </header>
@@ -53,34 +68,74 @@ const base = import.meta.env.BASE_URL;
         <p>&copy; {new Date().getFullYear()} Mirai.</p>
       </footer>
     </div>
+<script is:inline>
+  const button = document.querySelector(".theme-toggle");
+
+  button?.addEventListener("click", () => {
+    const root = document.documentElement;
+    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+
+    root.dataset.theme = nextTheme;
+    localStorage.setItem("theme", nextTheme);
+  });
+</script>
   </body>
 </html>
 
 <style>
   .masthead {
     padding-top: 1rem;
-    border-top: 1px dashed var(--line);
   }
 
-  .topbar {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 1rem;
-    padding-block: 0.7rem;
-    border-bottom: 1px dashed var(--line);
-    color: var(--muted);
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    font-weight: 700;
-  }
+.topbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px dashed var(--line);
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
 
-  .topbar span:nth-child(2) {
-    text-align: center;
-  }
+.topbar > span:first-child {
+  justify-self: start;
+}
 
-  .topbar span:last-child {
-    text-align: right;
-  }
+.topbar > span:nth-child(2) {
+  justify-self: center;
+  text-align: center;
+}
+
+.topbar-right {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  white-space: nowrap;
+}
+
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  padding: 0;
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
 
 .brand {
   display: block;
@@ -105,7 +160,7 @@ const base = import.meta.env.BASE_URL;
     padding-block: 0.75rem;
     border-top: 1px dashed var(--line);
     border-bottom: 1px dashed var(--line);
-    color: #4c4740;
+    color: var(--muted);
     font-family: var(--font-sans);
     font-size: 0.72rem;
     font-weight: 500;
@@ -122,7 +177,6 @@ const base = import.meta.env.BASE_URL;
   .footer {
     margin-top: 3rem;
     padding-block: 1.25rem;
-    border-top: 1px dashed var(--line);
     color: var(--muted);
     font-family: var(--font-sans);
     font-size: 0.78rem;

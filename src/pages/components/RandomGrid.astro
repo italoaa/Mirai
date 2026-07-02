@@ -1,0 +1,310 @@
+---
+type GridItem = {
+  id: string;
+  collection: string;
+  body?: string;
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    draft?: boolean;
+    featured?: boolean;
+    image?: string;
+  };
+};
+
+interface Props {
+  items: GridItem[];
+  title?: string;
+  emptyMessage?: string;
+}
+
+const {
+  items,
+  title,
+  emptyMessage = "No posts yet.",
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+
+const getHref = (item: GridItem) => `${base}${item.collection}/${item.id}/`;
+
+const getKicker = (item: GridItem) => {
+  if (item.collection === "blog") {
+    return item.data.featured ? "Featured" : "Blog";
+  }
+
+  if (item.collection === "photos") {
+    return "Photo";
+  }
+
+  if (item.collection === "ceramics") {
+    return "Ceramics";
+  }
+
+  return item.collection;
+};
+
+const getExcerpt = (item: GridItem, length = 200) => {
+  const raw = item.body ?? "";
+
+  const clean = raw
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/[#>*_`~-]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!clean) return item.data.description;
+
+  return clean.length > length ? `${clean.slice(0, length)}...` : clean;
+};
+---
+
+<section class="random-grid-block">
+  {title ? <h2 class="section-title">{title}</h2> : null}
+
+  {items.length > 0 ? (
+    <div class="random-grid" data-random-grid>
+      {items.map((item) => (
+        <article class={`post-tile tile-medium ${item.collection}-tile`} data-random-tile>
+          <a class="post-link" href={getHref(item)}>
+            <div>
+              {item.data.image ? (
+                <figure class="tile-image">
+                  <img src={item.data.image} alt={item.data.title} />
+                </figure>
+              ) : null}
+
+              <p class="kicker">{getKicker(item)}</p>
+
+              <h3 class="entry-title">{item.data.title}</h3>
+
+              <p class="dek">{item.data.description}</p>
+
+              <p class="excerpt">{getExcerpt(item)}</p>
+            </div>
+
+            <p class="meta">{item.data.pubDate.toLocaleDateString("en")}</p>
+          </a>
+        </article>
+      ))}
+    </div>
+  ) : (
+    <p class="muted">{emptyMessage}</p>
+  )}
+</section>
+
+<script is:inline>
+  const tileClasses = [
+    "tile-large",
+    "tile-wide",
+    "tile-tall",
+    "tile-small",
+    "tile-medium",
+    "tile-small",
+    "tile-wide",
+    "tile-medium",
+  ];
+
+  const shuffle = (items) =>
+    [...items]
+      .map((item) => ({
+        item,
+        sort: Math.random(),
+      }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ item }) => item);
+
+  document.querySelectorAll("[data-random-grid]").forEach((grid) => {
+    const tiles = Array.from(grid.querySelectorAll("[data-random-tile]"));
+    const randomizedClasses = shuffle(tileClasses);
+
+    tiles.forEach((tile, index) => {
+      tile.classList.remove(
+        "tile-large",
+        "tile-wide",
+        "tile-tall",
+        "tile-small",
+        "tile-medium"
+      );
+
+      tile.classList.add(randomizedClasses[index % randomizedClasses.length]);
+    });
+  });
+</script>
+
+<style>
+  .random-grid-block {
+    padding-block: 1.25rem;
+  }
+
+  .random-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: minmax(9rem, auto);
+    gap: 0;
+  }
+
+  .post-tile {
+    position: relative;
+    min-height: 13rem;
+    border: 1px dashed var(--line);
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .post-link {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    text-decoration: none;
+  }
+
+  .post-link:hover .entry-title {
+    color: var(--primary);
+  }
+
+  .post-tile:nth-child(odd) {
+    background: transparent;
+  }
+
+  .post-tile:nth-child(3n) {
+    background: var(--bg);
+  }
+
+  .tile-image {
+    margin: 0 0 0.9rem;
+  }
+
+  .tile-image img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .tile-large {
+    grid-column: span 3;
+    grid-row: span 2;
+  }
+
+  .tile-wide {
+    grid-column: span 3;
+  }
+
+  .tile-tall {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .tile-medium {
+    grid-column: span 2;
+  }
+
+  .tile-small {
+    grid-column: span 1;
+  }
+
+  .tile-large .entry-title {
+    font-size: clamp(2.8rem, 5vw, 5.5rem);
+  }
+
+  .tile-wide .entry-title {
+    font-size: clamp(2.2rem, 4vw, 4rem);
+  }
+
+  .tile-tall .entry-title {
+    font-size: clamp(2rem, 3.5vw, 3.6rem);
+  }
+
+  .tile-medium .entry-title {
+    font-size: clamp(1.75rem, 3vw, 2.7rem);
+  }
+
+  .tile-small .entry-title {
+    font-size: clamp(1.35rem, 2vw, 1.85rem);
+  }
+
+  .dek {
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+
+  .excerpt {
+    display: none;
+    margin: 0.9rem 0 0;
+    font-size: 0.98rem;
+    line-height: 1.35;
+  }
+
+  .tile-large .excerpt,
+  .tile-wide .excerpt,
+  .tile-tall .excerpt {
+    display: block;
+  }
+
+  .tile-small .dek,
+  .tile-medium .dek {
+    display: none;
+  }
+
+  .photos-tile .excerpt,
+  .ceramics-tile .excerpt {
+    display: none;
+  }
+
+  @media (max-width: 950px) {
+    .random-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .tile-large,
+    .tile-wide {
+      grid-column: span 4;
+    }
+
+    .tile-tall,
+    .tile-medium {
+      grid-column: span 2;
+    }
+
+    .tile-small {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .random-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+    }
+
+    .tile-large,
+    .tile-wide,
+    .tile-tall,
+    .tile-medium,
+    .tile-small {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .post-tile {
+      min-height: 0;
+    }
+
+    .post-link {
+      min-height: 12rem;
+    }
+
+    .tile-small .dek,
+    .tile-medium .dek {
+      display: block;
+    }
+  }
+</style>

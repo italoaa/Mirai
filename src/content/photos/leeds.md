@@ -1,7 +1,7 @@
 ---
 title: "Leeds"
 description: "Photos from my time in Leeds"
-pubDate: 2026-06-22
+pubDate: 2025-04-22
 author: "Italo Amaya"
 category: "Photos"
 featured: false

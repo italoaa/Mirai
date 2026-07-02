@@ -1,31 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import RandomGrid from "../components/RandomGrid.astro";
 import { getCollection } from "astro:content";
 
-const pieces = await getCollection("ceramics", ({ data }) => !data.draft);
-pieces.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const base = import.meta.env.BASE_URL;
+const posts = await getCollection("ceramics", ({ data }) => !data.draft);
+
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout title="Ceramics">
-  <section class="archive-block">
-    <h1 class="section-title">Ceramics</h1>
-
-    <div class="entry-list" style="margin-top: 1rem;">
-      {pieces.length > 0 ? (
-        pieces.map((piece) => (
-          <article class="entry">
-            <p class="kicker">Studio log</p>
-            <h2 class="entry-title">
-              <a href={`${base}ceramics/${piece.id}/`}>{piece.data.title}</a>
-            </h2>
-            <p>{piece.data.description}</p>
-            <p class="meta">{piece.data.pubDate.toLocaleDateString("en")}</p>
-          </article>
-        ))
-      ) : (
-        <p class="muted">No ceramics entries yet. Add Markdown files under <code>src/content/ceramics</code>.</p>
-      )}
-    </div>
-  </section>
+  <RandomGrid
+    title="Ceramics"
+    items={posts}
+    emptyMessage="No ceramics posts yet. Add Markdown files under src/content/ceramics."
+  />
 </BaseLayout>

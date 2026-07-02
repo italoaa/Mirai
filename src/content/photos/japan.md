@@ -1,7 +1,7 @@
 ---
 title: "Japan"
 description: "Some photos I took when I was in japan"
-pubDate: 2026-06-20
+pubDate: 2025-07-20
 author: "Italo Amaya"
 category: "Photos"
 featured: true

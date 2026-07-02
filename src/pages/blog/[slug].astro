@@ -21,7 +21,6 @@ const { Content } = await render(post);
       <p class="dek">{post.data.description}</p>
 
       <div class="article-meta">
-        <span>Mirai Dispatch</span>
         <span>{post.data.pubDate.toLocaleDateString("en")}</span>
       </div>
     </header>
@@ -35,8 +34,6 @@ const { Content } = await render(post);
 <style>
   .blog-article {
     max-width: none;
-    border-top: 1px dashed var(--line);
-    border-bottom: 1px dashed var(--line);
   }
 
   .article-hero {

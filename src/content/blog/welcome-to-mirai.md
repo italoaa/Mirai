@@ -1,9 +1,9 @@
 ---
 title: "Breaking news! On Mirai"
 description: "Newspaper style website for my own life"
-pubDate: 2026-06-22
+pubDate: 2022-06-22
 draft: false
-featured: true
+featured: false
 ---
 
 This is the first post on the site.

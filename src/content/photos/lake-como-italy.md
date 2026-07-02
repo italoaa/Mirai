@@ -1,7 +1,7 @@
 ---
 title: "Lake Como, Italy"
 description: "Photos from Lake Como in Italy"
-pubDate: 2026-06-21
+pubDate: 2024-09-15
 author: "Italo Amaya"
 category: "Photos"
 featured: false
