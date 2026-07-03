@@ -17,6 +17,19 @@
   --container: 1200px;
   --page-padding: clamp(2rem, 8vw, 6.5rem);
   --radius: 10px;
+
+  /* Shiki syntax colors */
+  --astro-code-foreground: #1f1a14;
+  --astro-code-background: transparent;
+  --astro-code-token-constant: #8f4d2f;
+  --astro-code-token-string: #6f552e;
+  --astro-code-token-comment: #756f66;
+  --astro-code-token-keyword: #8f2f2f;
+  --astro-code-token-parameter: #73518f;
+  --astro-code-token-function: #355f8c;
+  --astro-code-token-string-expression: #4f6f3a;
+  --astro-code-token-punctuation: #1f1a14;
+  --astro-code-token-link: #355f8c;
 }
 
 :root[data-theme="dark"] {
@@ -27,6 +40,19 @@
   --primary: #c9a469;
   --accent: #8e7a4f;
   --line: #4a4033;
+
+  /* Shiki syntax colors */
+  --astro-code-foreground: #f4f0e8;
+  --astro-code-background: transparent;
+  --astro-code-token-constant: #d89b72;
+  --astro-code-token-string: #d3b66f;
+  --astro-code-token-comment: #b8ad9a;
+  --astro-code-token-keyword: #e08f8f;
+  --astro-code-token-parameter: #c3a4df;
+  --astro-code-token-function: #9fbce3;
+  --astro-code-token-string-expression: #a8c98b;
+  --astro-code-token-punctuation: #f4f0e8;
+  --astro-code-token-link: #9fbce3;
 }
 
 * {
@@ -182,7 +208,7 @@ figure {
 figure img,
 .tile-image img,
 .photo-frame img,
-.article-body :global(img) {
+.article-body img {
   display: block;
   width: 100%;
   border: 1px solid var(--line);
@@ -287,56 +313,137 @@ figcaption,
   font-size: 1.08rem;
 }
 
-.article-body :global(p) {
+.article-body p {
   margin-block: 0 1rem;
 }
 
-.article-body :global(h1),
-.article-body :global(h2),
-.article-body :global(h3) {
+.article-body h1,
+.article-body h2,
+.article-body h3 {
   margin: 1.75rem 0 0.5rem;
   font-family: var(--font-display);
   line-height: 1;
   letter-spacing: -0.05em;
 }
 
-.article-body :global(a) {
+.article-body a {
   text-decoration-color: var(--primary);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.12em;
 }
 
-.article-body :global(img) {
+.article-body img {
   display: block;
   width: 100%;
   margin: 1.25rem 0;
   border-radius: 0;
 }
 
-.article-body :global(pre) {
+/* Code blocks */
+
+.article-body pre,
+.article-body .astro-code {
+  position: relative;
   overflow-x: auto;
-  padding: 1rem;
-  border: 1px dashed var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+  margin: 1.5rem 0;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--line) 72%, var(--ink) 28%);
+  border-left: 4px double var(--primary);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--surface) 88%, var(--ink) 12%) !important;
+  color: var(--astro-code-foreground);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  white-space: pre;
 }
 
-.article-body :global(code) {
-  font-size: 0.9em;
+.article-body pre::before,
+.article-body .astro-code::before {
+  content: "CODE EXCERPT";
+  display: block;
+  margin: -0.25rem 0 0.85rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dashed color-mix(in srgb, var(--line) 70%, var(--ink) 30%);
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.article-body pre code,
+.article-body .astro-code code {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+  font: inherit;
+}
+
+.article-body .astro-code span {
+  background: transparent !important;
+}
+
+.article-body :not(pre) > code {
+  padding: 0.08em 0.28em;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, var(--ink) 30%);
+  background: color-mix(in srgb, var(--surface) 84%, var(--ink) 16%);
+  color: var(--ink);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.82em;
+  white-space: nowrap;
+}
+
+/* Dark mode code blocks */
+
+:root[data-theme="dark"] .article-body pre,
+:root[data-theme="dark"] .article-body .astro-code {
+  border-color: color-mix(in srgb, var(--line) 82%, white 10%);
+  border-left-color: var(--primary);
+  background: color-mix(in srgb, var(--surface) 88%, black 12%) !important;
+  color: var(--astro-code-foreground);
+}
+
+:root[data-theme="dark"] .article-body pre::before,
+:root[data-theme="dark"] .article-body .astro-code::before {
+  border-bottom-color: var(--line);
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .article-body :not(pre) > code {
+  border-color: var(--line);
+  background: color-mix(in srgb, var(--surface) 88%, black 12%);
+  color: var(--ink);
 }
 
 /* Mobile */
 
-@media (max-width: 700px) {
-  :root {
-    --page-padding: 1rem;
+@media (max-width: 640px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.65rem;
+    font-size: 0.62rem;
   }
 
-  .site-shell {
-    width: min(100% - 2rem, var(--container));
+  .topbar-right {
+    gap: 0.5rem;
   }
 
-  .article-page {
-    margin-inline: 0;
+  .theme-toggle {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .brand {
+    font-size: clamp(3.8rem, 22vw, 5.8rem);
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 0.85rem;
   }
 }
