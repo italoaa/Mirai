@@ -13,8 +13,8 @@ image: "/images/photos/girona/DSCN3811.JPG"
 Some photos from my trip with my family to Girona and surroundings.
 
 
-<img src="/images/photos/leeds/DSCN3778.JPG" alt="girona photo" />
-<img src="/images/photos/leeds/DSCN3804.JPG" alt="girona photo" />
-<img src="/images/photos/leeds/DSCN3825.JPG" alt="girona photo" />
-<img src="/images/photos/leeds/DSCN3831.JPG" alt="girona photo" />
-<img src="/images/photos/leeds/DSCN3832.JPG" alt="girona photo" />
+<img src="/images/photos/girona/DSCN3778.JPG" alt="girona photo" />
+<img src="/images/photos/girona/DSCN3804.JPG" alt="girona photo" />
+<img src="/images/photos/girona/DSCN3825.JPG" alt="girona photo" />
+<img src="/images/photos/girona/DSCN3831.JPG" alt="girona photo" />
+<img src="/images/photos/girona/DSCN3832.JPG" alt="girona photo" />
