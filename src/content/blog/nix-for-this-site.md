@@ -2,7 +2,7 @@
 title: "Nix for this site"
 description: "How I use Nix to build this site and provide a development environment."
 pubDate: "2026-07-03"
-tags: ["Nix", "AI"]
+tags: ["Nix"]
 draft: false
 ---
 
