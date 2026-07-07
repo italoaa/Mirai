@@ -1,5 +1,5 @@
 ---
-title: "Deciding what to consume"
+title: "Attitude"
 description: "What does decision mean? How does it affect our consumption of information?"
 pubDate: "2026-07-06"
 tags: ["Thought"]
