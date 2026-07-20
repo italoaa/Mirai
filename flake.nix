@@ -21,6 +21,7 @@
         devShells.default = pkgs.mkShell {
           packages = [
             nodejs
+            pkgs.python312
             pkgs.git
           ];
 
@@ -34,6 +35,7 @@
             echo "Astro dev shell"
             echo "node:  $(node --version)"
             echo "npm:   $(npm --version)"
+            echo "python: $(python --version)"
 
             echo ""
             echo "Run Astro:"

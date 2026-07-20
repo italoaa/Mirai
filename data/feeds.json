@@ -1,0 +1,110 @@
+{
+  "updated_at": "2026-07-20T09:30:15.219293+00:00",
+  "articles": [
+    {
+      "title": "Emacs: Completion in the buffer with completion-at-point-functions",
+      "url": "https://protesilaos.com/codelog/2026-07-19-emacs-completion-at-point-functions/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "In this video I explain how in-buffer completion works and what are the packages for interacting with such completions.",
+      "published": "2026-07-19T00:00:00+00:00"
+    },
+    {
+      "title": "Français: La parrhésie",
+      "url": "https://protesilaos.com/french/2026-07-18-la-parrhesie/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "J'ai la qualité de m'exprimer sincèrement.",
+      "published": "2026-07-18T00:00:00+00:00"
+    },
+    {
+      "title": "Emacs: ‘doric-lilac’ and ‘doric-borage’ coming to the ‘doric-themes’",
+      "url": "https://protesilaos.com/codelog/2026-07-16-emacs-doric-lilac-doric-borage/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "I am developing two new themes for my minimalist 'doric-themes' package.",
+      "published": "2026-07-16T00:00:00+00:00"
+    },
+    {
+      "title": "Selfie: on a casual walk, facing the sun",
+      "url": "https://protesilaos.com/selfies/2026-07-15-facing-sun-casual-walk/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "I was out on a walk and took this picture while looking in the direction of the sun.",
+      "published": "2026-07-15T00:00:00+00:00"
+    },
+    {
+      "title": "Games: Halo: The Master Chief Collection",
+      "url": "https://protesilaos.com/games/2026-07-14-halo-master-chief-collection/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "First-person shooter games from the expansive Halo universe, plus philosophical thoughts of mine.",
+      "published": "2026-07-14T00:00:00+00:00"
+    },
+    {
+      "title": "ytr: YouTube radio for Emacs",
+      "url": "https://xenodium.com/ytr-youtube-radio-for-emacs",
+      "source": "Xenodium.com",
+      "description": "I've been a happy ready-player user for some time now. I consider the Emacs package fairly feature-complete, for my needs anyway. Well almost. While I've successfully migrated most of my music-listening to offline playback, there are the...",
+      "published": "2026-06-23T00:00:00+00:00"
+    },
+    {
+      "title": "agent-shell 0.55 updates",
+      "url": "https://xenodium.com/agent-shell-0-55-updates",
+      "source": "Xenodium.com",
+      "description": "It's been a little while since my last agent-shell update , so let's go through the latest highlights as of v0.55. What's agent-shell ? agent-shell is a native Emacs mode to interact with AI agents powered by ACP ( Agent Client Protocol...",
+      "published": "2026-06-11T00:00:00+00:00"
+    },
+    {
+      "title": "…and then there were three (expect delays)",
+      "url": "https://xenodium.com/and-then-there-were-three",
+      "source": "Xenodium.com",
+      "description": "The other day, my partner and I went into the hospital as two and came out as three. This week, I became a father. From the second I cuddled this little fella, I felt like I'd known him my entire life. I love him so much. Since going ind...",
+      "published": "2026-04-03T00:00:00+00:00"
+    },
+    {
+      "title": "agent-shell 0.47 updates",
+      "url": "https://xenodium.com/agent-shell-0-47-1-updates",
+      "source": "Xenodium.com",
+      "description": "We got quite a few agent-shell additions since the last post , so let's go through the highlights as of v0.47.1 . What's agent-shell ? Agent shell is a native Emacs mode to interact with LLM agents powered by ACP ( Agent Client Protocol...",
+      "published": "2026-03-12T00:00:00+00:00"
+    },
+    {
+      "title": "Bending Emacs - Episode 13: agent-shell charting",
+      "url": "https://xenodium.com/bending-emacs-episode-13-agent-shell-charting",
+      "source": "Xenodium.com",
+      "description": "Time for a new Bending Emacs episode. This one is a follow-up to Episode 12 , where we explored Claude Skills as emacs-skills . Bending Emacs Episode 13: agent-shell + Claude Skills + Charts This time around, we look at inline image rend...",
+      "published": "2026-03-04T00:00:00+00:00"
+    },
+    {
+      "title": "Superlinear Returns",
+      "url": "http://www.paulgraham.com/superlinear.html",
+      "source": "Paul Graham: Essays",
+      "description": "",
+      "published": ""
+    },
+    {
+      "title": "How to Do Great Work",
+      "url": "http://www.paulgraham.com/greatwork.html",
+      "source": "Paul Graham: Essays",
+      "description": "",
+      "published": ""
+    },
+    {
+      "title": "How to Get New Ideas",
+      "url": "http://www.paulgraham.com/getideas.html",
+      "source": "Paul Graham: Essays",
+      "description": "",
+      "published": ""
+    },
+    {
+      "title": "The Need to Read",
+      "url": "http://www.paulgraham.com/read.html",
+      "source": "Paul Graham: Essays",
+      "description": "",
+      "published": ""
+    },
+    {
+      "title": "What You (Want to)* Want",
+      "url": "http://www.paulgraham.com/want.html",
+      "source": "Paul Graham: Essays",
+      "description": "",
+      "published": ""
+    }
+  ]
+}
