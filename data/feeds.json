@@ -1,6 +1,20 @@
 {
-  "updated_at": "2026-07-20T09:30:15.219293+00:00",
+  "updated_at": "2026-07-21T08:15:09.521344+00:00",
   "articles": [
+    {
+      "title": "Français: En parlant",
+      "url": "https://protesilaos.com/french/2026-07-20-en-parlant-avec-les-autres/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "En parlent nous pratiquons le langue et nous découvrons un peu plus de le monde.",
+      "published": "2026-07-20T00:00:00+00:00"
+    },
+    {
+      "title": "On the war in Ukraine and social expectations of manhood",
+      "url": "https://protesilaos.com/politics/2026-07-20-war-ukraine-social-expectations-manhood/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Comment on the unscrupulous interests that benefit from the endless war in Ukraine as well as a critique of certain narratives about masculinity.",
+      "published": "2026-07-20T00:00:00+00:00"
+    },
     {
       "title": "Emacs: Completion in the buffer with completion-at-point-functions",
       "url": "https://protesilaos.com/codelog/2026-07-19-emacs-completion-at-point-functions/",
@@ -21,20 +35,6 @@
       "source": "Protesilaos Stavrou: Master feed",
       "description": "I am developing two new themes for my minimalist 'doric-themes' package.",
       "published": "2026-07-16T00:00:00+00:00"
-    },
-    {
-      "title": "Selfie: on a casual walk, facing the sun",
-      "url": "https://protesilaos.com/selfies/2026-07-15-facing-sun-casual-walk/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "I was out on a walk and took this picture while looking in the direction of the sun.",
-      "published": "2026-07-15T00:00:00+00:00"
-    },
-    {
-      "title": "Games: Halo: The Master Chief Collection",
-      "url": "https://protesilaos.com/games/2026-07-14-halo-master-chief-collection/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "First-person shooter games from the expansive Halo universe, plus philosophical thoughts of mine.",
-      "published": "2026-07-14T00:00:00+00:00"
     },
     {
       "title": "ytr: YouTube radio for Emacs",
