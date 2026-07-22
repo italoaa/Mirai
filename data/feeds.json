@@ -1,6 +1,20 @@
 {
-  "updated_at": "2026-07-21T08:15:09.521344+00:00",
+  "updated_at": "2026-07-22T08:15:43.720558+00:00",
   "articles": [
+    {
+      "title": "agent-shell 0.63 updates",
+      "url": "https://xenodium.com/agent-shell-0-63-updates",
+      "source": "Xenodium.com",
+      "description": "It hasn't been long since the 0.55 update , but plenty has landed since. Let's go through the highlights as of v0.63. What's agent-shell ? agent-shell is a native Emacs mode to interact with AI agents powered by ACP ( Agent Client Protoc...",
+      "published": "2026-07-22T00:00:00+00:00"
+    },
+    {
+      "title": "Religion and theology in light of the Greek gods",
+      "url": "https://protesilaos.com/politics/2026-07-21-religion-theology-greek-gods/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Extended commentary on how I understand matters of ethnicity, religion, and theology.",
+      "published": "2026-07-21T00:00:00+00:00"
+    },
     {
       "title": "Français: En parlant",
       "url": "https://protesilaos.com/french/2026-07-20-en-parlant-avec-les-autres/",
@@ -30,13 +44,6 @@
       "published": "2026-07-18T00:00:00+00:00"
     },
     {
-      "title": "Emacs: ‘doric-lilac’ and ‘doric-borage’ coming to the ‘doric-themes’",
-      "url": "https://protesilaos.com/codelog/2026-07-16-emacs-doric-lilac-doric-borage/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "I am developing two new themes for my minimalist 'doric-themes' package.",
-      "published": "2026-07-16T00:00:00+00:00"
-    },
-    {
       "title": "ytr: YouTube radio for Emacs",
       "url": "https://xenodium.com/ytr-youtube-radio-for-emacs",
       "source": "Xenodium.com",
@@ -63,13 +70,6 @@
       "source": "Xenodium.com",
       "description": "We got quite a few agent-shell additions since the last post , so let's go through the highlights as of v0.47.1 . What's agent-shell ? Agent shell is a native Emacs mode to interact with LLM agents powered by ACP ( Agent Client Protocol...",
       "published": "2026-03-12T00:00:00+00:00"
-    },
-    {
-      "title": "Bending Emacs - Episode 13: agent-shell charting",
-      "url": "https://xenodium.com/bending-emacs-episode-13-agent-shell-charting",
-      "source": "Xenodium.com",
-      "description": "Time for a new Bending Emacs episode. This one is a follow-up to Episode 12 , where we explored Claude Skills as emacs-skills . Bending Emacs Episode 13: agent-shell + Claude Skills + Charts This time around, we look at inline image rend...",
-      "published": "2026-03-04T00:00:00+00:00"
     },
     {
       "title": "Superlinear Returns",
