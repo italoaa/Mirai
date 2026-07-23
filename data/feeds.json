@@ -1,11 +1,32 @@
 {
-  "updated_at": "2026-07-22T08:15:43.720558+00:00",
+  "updated_at": "2026-07-23T08:20:30.035761+00:00",
   "articles": [
+    {
+      "title": "Selfie: short hair for peak summertime",
+      "url": "https://protesilaos.com/selfies/2026-07-22-short-hair-peak-summertime/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "I cut my hair short because it makes it easier to deal with the heat when I am working outside.",
+      "published": "2026-07-22T00:00:00+00:00"
+    },
+    {
+      "title": "Emacs: pulsar version 1.4.0",
+      "url": "https://protesilaos.com/codelog/2026-07-22-emacs-pulsar-1-4-0/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Information about the latest version of my pulsar package for GNU Emacs.",
+      "published": "2026-07-22T00:00:00+00:00"
+    },
+    {
+      "title": "Attending a rite related to Dioskouri",
+      "url": "https://protesilaos.com/news/2026-07-22-attending-dioskouri-rite/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "This Sunday I will join a group of Greek polytheists.",
+      "published": "2026-07-22T00:00:00+00:00"
+    },
     {
       "title": "agent-shell 0.63 updates",
       "url": "https://xenodium.com/agent-shell-0-63-updates",
       "source": "Xenodium.com",
-      "description": "It hasn't been long since the 0.55 update , but plenty has landed since. Let's go through the highlights as of v0.63. What's agent-shell ? agent-shell is a native Emacs mode to interact with AI agents powered by ACP ( Agent Client Protoc...",
+      "description": "It's been a little over a month since the 0.55 update , but plenty has landed since. Let's go through the highlights as of v0.63. What's agent-shell ? agent-shell is a native Emacs mode to interact with AI agents powered by ACP ( Agent C...",
       "published": "2026-07-22T00:00:00+00:00"
     },
     {
@@ -21,27 +42,6 @@
       "source": "Protesilaos Stavrou: Master feed",
       "description": "En parlent nous pratiquons le langue et nous découvrons un peu plus de le monde.",
       "published": "2026-07-20T00:00:00+00:00"
-    },
-    {
-      "title": "On the war in Ukraine and social expectations of manhood",
-      "url": "https://protesilaos.com/politics/2026-07-20-war-ukraine-social-expectations-manhood/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Comment on the unscrupulous interests that benefit from the endless war in Ukraine as well as a critique of certain narratives about masculinity.",
-      "published": "2026-07-20T00:00:00+00:00"
-    },
-    {
-      "title": "Emacs: Completion in the buffer with completion-at-point-functions",
-      "url": "https://protesilaos.com/codelog/2026-07-19-emacs-completion-at-point-functions/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "In this video I explain how in-buffer completion works and what are the packages for interacting with such completions.",
-      "published": "2026-07-19T00:00:00+00:00"
-    },
-    {
-      "title": "Français: La parrhésie",
-      "url": "https://protesilaos.com/french/2026-07-18-la-parrhesie/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "J'ai la qualité de m'exprimer sincèrement.",
-      "published": "2026-07-18T00:00:00+00:00"
     },
     {
       "title": "ytr: YouTube radio for Emacs",
