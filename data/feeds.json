@@ -1,6 +1,20 @@
 {
-  "updated_at": "2026-07-24T08:14:44.350093+00:00",
+  "updated_at": "2026-07-25T07:57:31.366474+00:00",
   "articles": [
+    {
+      "title": "Poem: From sea you come",
+      "url": "https://protesilaos.com/poems/2026-07-24-from-sea-you-come/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Just read the poem. No further comment.",
+      "published": "2026-07-24T00:00:00+00:00"
+    },
+    {
+      "title": "Emacs: Substitute version 0.5.0",
+      "url": "https://protesilaos.com/codelog/2026-07-24-emacs-substitute-0-6-0/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Information about the latest version of my 'substitute' package for Emacs.",
+      "published": "2026-07-24T00:00:00+00:00"
+    },
     {
       "title": "Selfie: short hair for peak summertime",
       "url": "https://protesilaos.com/selfies/2026-07-22-short-hair-peak-summertime/",
@@ -28,20 +42,6 @@
       "source": "Xenodium.com",
       "description": "It's been a little over a month since the 0.55 update , but plenty has landed since. Let's go through the highlights as of v0.63. What's agent-shell ? agent-shell is a native Emacs mode to interact with AI agents powered by ACP ( Agent C...",
       "published": "2026-07-22T00:00:00+00:00"
-    },
-    {
-      "title": "Religion and theology in light of the Greek gods",
-      "url": "https://protesilaos.com/politics/2026-07-21-religion-theology-greek-gods/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Extended commentary on how I understand matters of ethnicity, religion, and theology.",
-      "published": "2026-07-21T00:00:00+00:00"
-    },
-    {
-      "title": "Français: En parlant",
-      "url": "https://protesilaos.com/french/2026-07-20-en-parlant-avec-les-autres/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "En parlent nous pratiquons le langue et nous découvrons un peu plus de le monde.",
-      "published": "2026-07-20T00:00:00+00:00"
     },
     {
       "title": "ytr: YouTube radio for Emacs",
