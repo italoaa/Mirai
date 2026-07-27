@@ -1,6 +1,27 @@
 {
-  "updated_at": "2026-07-26T08:15:24.628666+00:00",
+  "updated_at": "2026-07-27T09:39:01.073408+00:00",
   "articles": [
+    {
+      "title": "About the ethnic Greek rite I attended",
+      "url": "https://protesilaos.com/news/2026-07-27-ethnic-greek-rite-attendance/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "I joined a group of polytheists and describe my experience.",
+      "published": "2026-07-27T00:00:00+00:00"
+    },
+    {
+      "title": "Selfie: reaching the seaside",
+      "url": "https://protesilaos.com/selfies/2026-07-26-reaching-seaside/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "I attended an event that took place on a hill overlooking the sea.",
+      "published": "2026-07-26T00:00:00+00:00"
+    },
+    {
+      "title": "Θρησκεία και θεολογία με θέμα τον Ελληνικό πολυθεϊσμό",
+      "url": "https://protesilaos.com/greek/2026-07-26-religion-theologyy-greek-gods/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Θέσεις για την σημασία της εθνικής Ελληνικής θρησκείας και των συγκεκριμένων χαρακτηριστικών της.",
+      "published": "2026-07-26T00:00:00+00:00"
+    },
     {
       "title": "Poem: From sea you come",
       "url": "https://protesilaos.com/poems/2026-07-24-from-sea-you-come/",
@@ -14,27 +35,6 @@
       "source": "Protesilaos Stavrou: Master feed",
       "description": "Information about the latest version of my 'substitute' package for Emacs.",
       "published": "2026-07-24T00:00:00+00:00"
-    },
-    {
-      "title": "Selfie: short hair for peak summertime",
-      "url": "https://protesilaos.com/selfies/2026-07-22-short-hair-peak-summertime/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "I cut my hair short because it makes it easier to deal with the heat when I am working outside.",
-      "published": "2026-07-22T00:00:00+00:00"
-    },
-    {
-      "title": "Emacs: pulsar version 1.4.0",
-      "url": "https://protesilaos.com/codelog/2026-07-22-emacs-pulsar-1-4-0/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Information about the latest version of my pulsar package for GNU Emacs.",
-      "published": "2026-07-22T00:00:00+00:00"
-    },
-    {
-      "title": "Attending a rite related to Dioskouri",
-      "url": "https://protesilaos.com/news/2026-07-22-attending-dioskouri-rite/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "This Sunday I will join a group of Greek polytheists.",
-      "published": "2026-07-22T00:00:00+00:00"
     },
     {
       "title": "agent-shell 0.63 updates",
