@@ -1,6 +1,27 @@
 {
-  "updated_at": "2026-07-27T09:39:01.073408+00:00",
+  "updated_at": "2026-07-28T08:23:31.128425+00:00",
   "articles": [
+    {
+      "title": "Poem: Distant is the barking",
+      "url": "https://protesilaos.com/poems/2026-07-27-distant-barking/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Just read the poem. No further comment.",
+      "published": "2026-07-27T00:00:00+00:00"
+    },
+    {
+      "title": "On the importance of rituals",
+      "url": "https://protesilaos.com/commentary/2026-07-27-importance-rituals/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Rituals help us experience the slow-paced life that is necessary for understanding the world all around us.",
+      "published": "2026-07-27T00:00:00+00:00"
+    },
+    {
+      "title": "Beyond the temple",
+      "url": "https://protesilaos.com/commentary/2026-07-27-beyond-the-temple/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Commentary on the propensity of people to value tokens more than what they represent.",
+      "published": "2026-07-27T00:00:00+00:00"
+    },
     {
       "title": "About the ethnic Greek rite I attended",
       "url": "https://protesilaos.com/news/2026-07-27-ethnic-greek-rite-attendance/",
@@ -14,27 +35,6 @@
       "source": "Protesilaos Stavrou: Master feed",
       "description": "I attended an event that took place on a hill overlooking the sea.",
       "published": "2026-07-26T00:00:00+00:00"
-    },
-    {
-      "title": "Θρησκεία και θεολογία με θέμα τον Ελληνικό πολυθεϊσμό",
-      "url": "https://protesilaos.com/greek/2026-07-26-religion-theologyy-greek-gods/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Θέσεις για την σημασία της εθνικής Ελληνικής θρησκείας και των συγκεκριμένων χαρακτηριστικών της.",
-      "published": "2026-07-26T00:00:00+00:00"
-    },
-    {
-      "title": "Poem: From sea you come",
-      "url": "https://protesilaos.com/poems/2026-07-24-from-sea-you-come/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Just read the poem. No further comment.",
-      "published": "2026-07-24T00:00:00+00:00"
-    },
-    {
-      "title": "Emacs: Substitute version 0.5.0",
-      "url": "https://protesilaos.com/codelog/2026-07-24-emacs-substitute-0-6-0/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Information about the latest version of my 'substitute' package for Emacs.",
-      "published": "2026-07-24T00:00:00+00:00"
     },
     {
       "title": "agent-shell 0.63 updates",
