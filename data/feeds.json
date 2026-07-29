@@ -1,40 +1,40 @@
 {
-  "updated_at": "2026-07-28T08:23:31.128425+00:00",
+  "updated_at": "2026-07-29T08:29:34.258094+00:00",
   "articles": [
+    {
+      "title": "Français: Diffusion en direct sur Emacs avec Sacha Chua et Richard Bonichon @ 2026-08-06 14:30 Europe/Athènes",
+      "url": "https://protesilaos.com/french/2026-07-28-emacs-diffusion-en-direct-sacha-chua-richard-bonichon/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Nous allons avoir une discussion sur le sujet d'Emacs.",
+      "published": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "Poem: Hymn to the oak tree (Ύμνος στον δρυ)",
+      "url": "https://protesilaos.com/poems/2026-07-28-hymn-oak-tree/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Just read the poem. No further comment.",
+      "published": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "Poem: Hymn to the honeybee (Ύμνος στην μέλισσα)",
+      "url": "https://protesilaos.com/poems/2026-07-28-hymn-honeybee/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Just read the poem. No further comment.",
+      "published": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "Poem: Hymn to the dog (Ύμνος στον σκύλο)",
+      "url": "https://protesilaos.com/poems/2026-07-28-hymn-dog/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Just read the poem. No further comment.",
+      "published": "2026-07-28T00:00:00+00:00"
+    },
     {
       "title": "Poem: Distant is the barking",
       "url": "https://protesilaos.com/poems/2026-07-27-distant-barking/",
       "source": "Protesilaos Stavrou: Master feed",
       "description": "Just read the poem. No further comment.",
       "published": "2026-07-27T00:00:00+00:00"
-    },
-    {
-      "title": "On the importance of rituals",
-      "url": "https://protesilaos.com/commentary/2026-07-27-importance-rituals/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Rituals help us experience the slow-paced life that is necessary for understanding the world all around us.",
-      "published": "2026-07-27T00:00:00+00:00"
-    },
-    {
-      "title": "Beyond the temple",
-      "url": "https://protesilaos.com/commentary/2026-07-27-beyond-the-temple/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Commentary on the propensity of people to value tokens more than what they represent.",
-      "published": "2026-07-27T00:00:00+00:00"
-    },
-    {
-      "title": "About the ethnic Greek rite I attended",
-      "url": "https://protesilaos.com/news/2026-07-27-ethnic-greek-rite-attendance/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "I joined a group of polytheists and describe my experience.",
-      "published": "2026-07-27T00:00:00+00:00"
-    },
-    {
-      "title": "Selfie: reaching the seaside",
-      "url": "https://protesilaos.com/selfies/2026-07-26-reaching-seaside/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "I attended an event that took place on a hill overlooking the sea.",
-      "published": "2026-07-26T00:00:00+00:00"
     },
     {
       "title": "agent-shell 0.63 updates",
