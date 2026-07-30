@@ -1,6 +1,13 @@
 {
-  "updated_at": "2026-07-29T08:29:34.258094+00:00",
+  "updated_at": "2026-07-30T08:13:34.797922+00:00",
   "articles": [
+    {
+      "title": "Emacs: default minibuffer completions overview (Emacs 31)",
+      "url": "https://protesilaos.com/codelog/2026-07-29-emacs-default-minibuffer-completion-overview/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Overview of the default interface for minibuffer completions. This has been improved for Emacs version 31.",
+      "published": "2026-07-29T00:00:00+00:00"
+    },
     {
       "title": "Français: Diffusion en direct sur Emacs avec Sacha Chua et Richard Bonichon @ 2026-08-06 14:30 Europe/Athènes",
       "url": "https://protesilaos.com/french/2026-07-28-emacs-diffusion-en-direct-sacha-chua-richard-bonichon/",
@@ -28,13 +35,6 @@
       "source": "Protesilaos Stavrou: Master feed",
       "description": "Just read the poem. No further comment.",
       "published": "2026-07-28T00:00:00+00:00"
-    },
-    {
-      "title": "Poem: Distant is the barking",
-      "url": "https://protesilaos.com/poems/2026-07-27-distant-barking/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Just read the poem. No further comment.",
-      "published": "2026-07-27T00:00:00+00:00"
     },
     {
       "title": "agent-shell 0.63 updates",
