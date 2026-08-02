@@ -1,6 +1,13 @@
 {
-  "updated_at": "2026-08-01T08:10:21.426444+00:00",
+  "updated_at": "2026-08-02T08:11:41.118691+00:00",
   "articles": [
+    {
+      "title": "Emacs live with @linkarzu on his workflow, Org capture, and projects (2026-08-01 22:20 Europe/Athens)",
+      "url": "https://protesilaos.com/codelog/2026-08-01-emacs-live-linkarzu-projects/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "A live stream with Christian Arzu about the basics of Org capture, Emacs projects, and his NeoVim+Kitty workflow for session management.",
+      "published": "2026-08-01T00:00:00+00:00"
+    },
     {
       "title": "Reply to @linkarzu about ‘What I Need From Emacs’",
       "url": "https://protesilaos.com/codelog/2026-07-31-re-linkarzu-what-i-need-from-emacs/",
@@ -28,13 +35,6 @@
       "source": "Protesilaos Stavrou: Master feed",
       "description": "Overview of the default interface for minibuffer completions. This has been improved for Emacs version 31.",
       "published": "2026-07-29T00:00:00+00:00"
-    },
-    {
-      "title": "Français: Diffusion en direct sur Emacs avec Sacha Chua et Richard Bonichon @ 2026-08-06 14:30 Europe/Athènes",
-      "url": "https://protesilaos.com/french/2026-07-28-emacs-diffusion-en-direct-sacha-chua-richard-bonichon/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Nous allons avoir une discussion sur le sujet d'Emacs.",
-      "published": "2026-07-28T00:00:00+00:00"
     },
     {
       "title": "agent-shell 0.63 updates",
