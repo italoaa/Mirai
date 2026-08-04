@@ -1,6 +1,13 @@
 {
-  "updated_at": "2026-08-03T09:32:00.980805+00:00",
+  "updated_at": "2026-08-04T08:27:41.236534+00:00",
   "articles": [
+    {
+      "title": "The way of the wizard",
+      "url": "https://protesilaos.com/commentary/2026-08-03-way-wizard/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Comment on how the pop culture view of the wizard gives us a deeper appreciation of how we can operate in the world.",
+      "published": "2026-08-03T00:00:00+00:00"
+    },
     {
       "title": "On the absolute other",
       "url": "https://protesilaos.com/books/2026-08-02-on-absolute-other/",
@@ -28,13 +35,6 @@
       "source": "Protesilaos Stavrou: Master feed",
       "description": "Information about the latest version of my TMR package for GNU Emacs.",
       "published": "2026-07-31T00:00:00+00:00"
-    },
-    {
-      "title": "Poem: Hymn to the rock (Ύμνος στον βράχο)",
-      "url": "https://protesilaos.com/poems/2026-07-30-hymn-rock/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Just read the poem. No further comment.",
-      "published": "2026-07-30T00:00:00+00:00"
     },
     {
       "title": "agent-shell 0.63 updates",
