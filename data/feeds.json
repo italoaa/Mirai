@@ -1,6 +1,13 @@
 {
-  "updated_at": "2026-08-04T08:27:41.236534+00:00",
+  "updated_at": "2026-08-05T08:26:08.390130+00:00",
   "articles": [
+    {
+      "title": "Poem: Hymn to the mountain (Ύμνος στο βουνό)",
+      "url": "https://protesilaos.com/poems/2026-08-04-hymn-mountain/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "Just read the poem. No further comment.",
+      "published": "2026-08-04T00:00:00+00:00"
+    },
     {
       "title": "The way of the wizard",
       "url": "https://protesilaos.com/commentary/2026-08-03-way-wizard/",
@@ -27,13 +34,6 @@
       "url": "https://protesilaos.com/codelog/2026-07-31-re-linkarzu-what-i-need-from-emacs/",
       "source": "Protesilaos Stavrou: Master feed",
       "description": "A comment on what Christian Arzu is searching for a better experience with Emacs.",
-      "published": "2026-07-31T00:00:00+00:00"
-    },
-    {
-      "title": "Emacs: tmr version 1.4.0",
-      "url": "https://protesilaos.com/codelog/2026-07-31-emacs-tmr-1-4-0/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "Information about the latest version of my TMR package for GNU Emacs.",
       "published": "2026-07-31T00:00:00+00:00"
     },
     {
