@@ -1,6 +1,13 @@
 {
-  "updated_at": "2026-08-05T08:26:08.390130+00:00",
+  "updated_at": "2026-08-06T08:23:59.186776+00:00",
   "articles": [
+    {
+      "title": "Emacs: the ‘speedbar’ built-in file explorer (Emacs 31)",
+      "url": "https://protesilaos.com/codelog/2026-08-05-emacs-speedbar-file-explorer/",
+      "source": "Protesilaos Stavrou: Master feed",
+      "description": "I demonstrate the 'speedbar' file explorer that is built into Emacs and is greatly improved for Emacs 31.",
+      "published": "2026-08-05T00:00:00+00:00"
+    },
     {
       "title": "Poem: Hymn to the mountain (Ύμνος στο βουνό)",
       "url": "https://protesilaos.com/poems/2026-08-04-hymn-mountain/",
@@ -28,13 +35,6 @@
       "source": "Protesilaos Stavrou: Master feed",
       "description": "A live stream with Christian Arzu about the basics of Org capture, Emacs projects, and his NeoVim+Kitty workflow for session management.",
       "published": "2026-08-01T00:00:00+00:00"
-    },
-    {
-      "title": "Reply to @linkarzu about ‘What I Need From Emacs’",
-      "url": "https://protesilaos.com/codelog/2026-07-31-re-linkarzu-what-i-need-from-emacs/",
-      "source": "Protesilaos Stavrou: Master feed",
-      "description": "A comment on what Christian Arzu is searching for a better experience with Emacs.",
-      "published": "2026-07-31T00:00:00+00:00"
     },
     {
       "title": "agent-shell 0.63 updates",
