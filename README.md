@@ -38,6 +38,21 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## Updating RSS feeds
+
+The RSS feed snapshot is updated locally. Run the update script, commit the
+generated data, and push it to `main`:
+
+```sh
+python scripts/update_feeds.py
+git add data/feeds.json
+git commit -m "Update RSS feeds"
+git push
+```
+
+Pushing the updated snapshot triggers the GitHub Pages workflow, which builds
+and publishes the site.
+
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
