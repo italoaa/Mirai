@@ -1,24 +1,29 @@
 ---
 title: "Devlog 1: Introduction to Rs-inf"
-description: "Building an inference engine in rust with cuda-oxide."
-pubDate: "2026-10-04"
+description: "Building the development setup."
+pubDate: "2026-10-09"
 tags: ["Nix", "Rust", "Cuda"]
-draft: true
+draft: false
 ---
 
 The project is being developed at: [rs-inf github](https://github.com/italoaa/rs-inf)
 
 # What is Rs-inf
-Like the name suggest is a simple inference engine with rust. The kicker of this project is the use of the [cuda-oxide](https://github.com/NVIDIA/cuda-rust/tree/main/cuda-oxide) crate, which is quite new, and it allows you to write CUDA (SIMT) kernels but in pure rust. This project will also help me stay updated with what is going on with cuda-oxide; there are lots of interesting things coming like using lean to prove kernels.
+Like the name suggest this project is a simple inference engine with rust. The kicker of this project is the use of the [cuda-oxide](https://github.com/NVIDIA/cuda-rust/tree/main/cuda-oxide) crate, which is quite new. It allows you to write CUDA (SIMT) kernels but in pure rust and this project will take advantage of that. As a side note I will be reading the legendary Programming Massively Parallel Processors (5th edition) to really learn these concepts well.
 
-The initial objective for this project, at least as of writing this post, is to be able to run a Qwen3 dense model. That is it. Even though this might sound unambitious I think it really is. If we take into consideration that: I have very little experience with cuda, will not use any coding agent (after all this is mostly to learn) and I am not fully updated with the latest LLM model architectures I think this is a good initial goal to set. Later I can think of optimizing the kernels or implementing more general operations that allow me to run MoEs or other model families.
+The initial objective for this project, at least as of writing this post, is to be able to run a Qwen3 dense model (not even efficiently). That is it. Even though this might sound unambitious I think it really is. If we take into consideration that: I have very little experience with cuda, will not use any coding agent (after all this is mostly to learn) and I am not fully updated with the latest LLM model architectures I think this is a good initial goal to set. The nice thing about this project through is that progression is measurable and quite clear. We just have to go fast.
 
 # The development environment
-So these are great plans but there is a problem: I do not have a nvidia GPU. My solution, use [vast.ai](https://vast.ai) to temporarily rent development boxes with access to nvidia GPUs. Now I know what you are thinking: Remote development? That sounds like a pain. Here comes **NIX** to the rescue.
+So these are great plans but there is a problem: I do not have an nvidia GPU. Thus my solution is to use [vast.ai](https://vast.ai) to rent development boxes with GPUs and be able to program them. Now I know what you are thinking, Remote development? That sounds like a pain, well it would be but I have one trick up my sleeve.
 
-Currently I have implemented a development workflow that I am happy with, it still needs a lot of work but right now I can develop in my host machine and upon file change in less than a couple seconds the code is already compiling in the development box.
+The trick? Nix. So basically lets drill down to why remote development is a pain:
+1. Bad connection
+2. Aligning dependencies is hard
+3. The iteration time is slow
 
-Most of my first week was spent on getting this setup to a place where I can start working with the GPU and not have many problems (it still a work in progress).
+The first one is simple, just rent boxes physically close to you. So in my case I will just rent machines in Europe. The second is more nuanced so I will defer it for later, and the third can be solved by having automatic sync and test watchers. These watchers will from the instance a change is made locally, propagate that change to the remote and test the new change ASAP.
+
+Currently I have implemented a development workflow that I am happy with, even though it still needs more work, it does what I mentioned above and lets me iterate fast. Most of my first week was spent on getting this setup ready so its was not simple to me. Now lets get to solving the second issue.
 
 ## Deterministic Environment
 I can't stress enough the importance of having a deterministic environment that is the same no matter **when** and **where** it runs. I think in a project like this where we need to juggle all of the following:
@@ -28,12 +33,12 @@ I can't stress enough the importance of having a deterministic environment that 
 4. dynamic linking paths
 5. Hardware compatibility
 
-And keep them all aligned ... that is why we need nix, later I will dive deeper.
+And keep them all aligned ... nix becomes kind of the only option, I will go deeper into detail later but this is one of the features of the development environment.
 
 ### DevShells and provisioning the DevBox
-Now one of the nice features of nix is the development shells. In the projects flake I built a devShell for `darwin` and for `linux`. In the case of `darwin`, I spin up a docker container based on `nixos/nix` image (also pinned) then inside that container I start the `linux` dev shell. This shell inherits `cuda-oxide`'s startup hook so it handles all the checking of dependencies and making sure everything is aligned.
+Now having development spread out between `x86_64-linux` and `x86_64-darwin` machines I can build development shells for each system with nix. In the flake I built a devShell for each system having the main one being `x86_64-linux`, and then `x86_64-darwin` could spin up a docker container based on `nixos/nix` image (also pinned) and start the `linux` dev shell within. The linux shell inherits `cuda-oxide`'s startup hook so it handles checking the dependencies and making sure everything is aligned (also pinned).
 
-Furthermore, the project has a `secrets.env` that holds the api key to vast. This file is encrypted using sops (of course) and during the startup of the dev shell we decrypt and load the secrets to the environment. With the secrets loaded we can make a request to vast to list all the available GPUs for us to use.
+Furthermore, the project has a `secrets.env` that holds the api key to vast. This file is encrypted using sops (of course) and during the startup of the dev shell we decrypt and load the secrets to the environment. With the secrets loaded we can make a request to vast to list all the available GPUs for us to use:
 
 ```sh
   #  ID        CUDA   N  Model        PCIE  cpu_ghz  vCPUs   RAM  VRAM  Disk  $/hr    DLP   DLP/$   score  NV Driver   Net_up  Net_down  R     Max_Days  mach_id  status
@@ -56,7 +61,7 @@ and it will start the instance up. Once the instance is running we can ssh into 
 just vast-ssh
 ```
 
-And if we will to stop it we can do so with:
+And if we want to stop it we can do so with:
 
 ```sh
 just vast-stop 46810398
@@ -69,17 +74,13 @@ just watch-vast-rsync # sync to remote on file change
 just watch-inf-test # recompile and test on file change
 ```
 
-The idea of the setup is to have in one terminal the synchronisation loop that pushes our changes to the remote, and in another terminal after we have done a `just vast-ssh` from inside the machine we can have the compilation and test loop.
+One terminal we have a synchronisation loop and in the other we have the compilation and test loop (should run after ssh). I would like these two to initialize automatically after we provision with `just vast start {{id}}` but for now it is fine.
 
 ### What is this DevBox
-- in here introduce the container output of the flake that builds the container
-- then lead the point to the place where it is rational to think, so where do we define the versions of the things getting installed to the container
-- this will make the next paragraph flow naturally out of necessity.
-- this means that my container already has most of my dependencies already bundled with it and there is no version mismatch that will secretly make me waste time.
-- I only need to ssh into the box, cd into the project and run the `just watch-inf-test` and it does it all.
+Now what is this container that we use for development? Well this container (no surprises here) is also built using nix. Starting from the `nixos/nix` base image I inherit `cuda-oxide`'s build inputs and native build inputs to make sure I have all the build dependencies baked in the container. With that ready I just have a sshd server started with my personal public ssh key.
 
 ### Inputs to hold everything down
-First we must pin what version of what we are going to use. In the case of our `flake.nix` we have the following:
+Now our flake takes as inputs `cuda-oxide` which is the nice part as it lets us make sure versions and dependencies line up, and don't move. For example the current pinned revision, as of writing this post, has `cuda-oxide` only compatible with CUDA 13.X which means I need to take that into account.
 ```nix
 inputs = {
   cuda-oxide.url = "github:NVlabs/cuda-rust?dir=cuda-oxide";
@@ -90,13 +91,7 @@ inputs = {
   vast-nixpkgs.url = "github:NixOS/nixpkgs/7a0f122f5090cf4c2ade2a13a0e229d4e19ba71f";
 };
 ```
-In our `flake.lock` we have the exact version that the cuda-oxide project uses for their own dependencies in their own `flake.nix`. This means that when we specify `nixpkgs` to follow that input we are saying to make sure we are in sync.
+The other nice thing of taking `cuda-oxide` as an input is that we can follow the version of `nixpkgs` they are using. This means that not only we have the same versions of cuda but also of every single other package in `nixpkgs`, from `emacs` to `sshd`. If they install a package through `nixpkgs` I can install it to and ensure I have the same exact version, to the hash level.
 
-- now say how with this and just i can search for only boxes with cuda 13.X and that I could even go further and try to only use newer architectures where the SM's are newer and compatible with the 13.x stuff.
-- then mention how with
-
-
-### Improvements
-- make the watch compilation-test loop start automatically on container start
-- start the rsync command automatically once a box is provisioned to vast
-- add a exit trap to the devshell that will make sure the user has no more running vast instances (no wasting resources)
+# Start of the project
+As I said this is only the start but it has already got me excited, I can have a development box ready to use in less than 5 minutes and compile a new kernel in less than 10. The aim is to keep bringing that number down by automating more and more, but this is a good start. By far the best thing of this setup is the deterministic nature. I feel completely at peace that no matter when I provision another box (be tomorrow or in 5 years) it will "just work".
