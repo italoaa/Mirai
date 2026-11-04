@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Playfair+Display:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:wght@400;500;600;700;800&display=swap");
 
 :root {
   --bg: #f4f0e8;
@@ -9,7 +9,7 @@
   --accent: #e8d5a8;
   --line: #d1cfcd;
 
-  --font-body: "DM Serif Text", Georgia, "Times New Roman", serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-brand: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-sans: Arial, Helvetica, sans-serif;
@@ -73,7 +73,13 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
+  font-weight: 400;
   line-height: 1.45;
+}
+
+strong,
+b {
+  font-weight: 700;
 }
 
 body {
@@ -337,6 +343,14 @@ figcaption,
   width: 100%;
   margin: 1.25rem 0;
   border-radius: 0;
+}
+
+/* Display equations can scroll on narrow screens. */
+
+.article-body .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
 }
 
 /* Code blocks */

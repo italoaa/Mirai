@@ -13,7 +13,10 @@ The project is being developed at: [rs-inf github](https://github.com/italoaa/rs
 > will try to catch up before I finish the major kernels.
 
 This log will be about the RMSNorm Kernel. This kernel computes the following:
-$$ y_i = \frac{x_i}{\sqrt{\frac{1}{N}\sum_j x^2_j + \epsilon}} \times \gamma_i $$
+
+$$
+y_i = \frac{x_i}{\sqrt{\frac{1}{N}\sum_j x^2_j + \epsilon}} \times \gamma_i
+$$
 
 The key part of this equation is the sum of squares reduction which is the key part to make this kernel as efficient as possible. This pattern is the reduction pattern and in the PMPP book is covered to a great extent. The key ideas to make sure this kernel runs fast is:
 1. Reduce control divergence and coalescing memory access

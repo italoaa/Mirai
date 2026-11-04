@@ -55,7 +55,7 @@
 
           nodejs = nodejs;
 
-          npmDepsHash = "sha256-OjRs5EVIORxkKg077FTwqV2M6sdvrSnth7dclBc5xik=";
+          npmDepsHash = "sha256-2/dRPO9yr94/Xqlq+lGLZDvALsN/FqlPW7/r5iUVgks=";
 
           npmBuildScript = "build";
 
