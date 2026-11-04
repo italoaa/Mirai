@@ -1,7 +1,7 @@
 ---
 title: "Devlog 3: RoPE"
 description: "Rotary Position Encodings"
-pubDate: "2026-11-4"
+pubDate: "2026-11-5"
 tags: ["Nix", "Rust", "Cuda"]
 draft: false
 ---
