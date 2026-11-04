@@ -1,7 +1,7 @@
 ---
 title: "Devlog 2: RMSNorm"
 description: "Building the first kernel."
-pubDate: "2026-10-XX"
+pubDate: "2026-11-4"
 tags: ["Nix", "Rust", "Cuda"]
 draft: false
 ---
